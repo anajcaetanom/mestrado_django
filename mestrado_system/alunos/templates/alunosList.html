@@ -1,0 +1,22 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Lista dos alunos
+{% endblock %}
+
+{% block content %}
+
+{% include "header.html" %}
+
+    <div class="container p-5 my-5 border"> 
+        <h1>Alunos</h1>
+
+        <ul>
+            {% for x in alunosValues %}
+            <li> <a href="alunoInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
+            {% endfor %}
+        </ul>
+
+        <h5><a href="/">Página Inicial</a></h5>
+    </div>
+{% endblock %}

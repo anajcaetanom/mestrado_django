@@ -1,0 +1,18 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Detalhes sobre {{ alunoID.nome }} {{ alunoID.sobrenome }}
+{% endblock %}
+
+{% block content %}
+
+    {% include "header.html" %}
+
+    <div class="container p-5 my-5 border"> 
+        <h1>{{ alunoID.nome }} {{ alunoID.sobrenome }}</h1>
+
+        <p>Curso: {{ alunoID.curso }}</p>
+
+        <p> <a href="/alunos">Retornar à lista de aluno completa</a> </p>
+    </div>
+{% endblock %}
