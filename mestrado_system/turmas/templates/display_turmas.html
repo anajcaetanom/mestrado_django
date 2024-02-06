@@ -1,0 +1,24 @@
+<!-- Lista de todas as turmas -->
+
+{% extends "master.html" %}
+
+{% block title %}
+  Lista das turmas
+{% endblock %}
+
+{% block content %}
+
+  {% include "header.html" %}
+
+  <div class="container p-5 my-5 border"> 
+    <h1>Turmas</h1>
+
+    <ul>
+      {% for x in all_turmas %}
+        <li><a href="details/{{ x.id }}"> {{ x.nome }}</a></li>
+      {% endfor %}
+    </ul>
+
+    <h5><a href="/">Página Inicial</a></h5>
+  </div>
+{% endblock %}

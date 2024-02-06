@@ -1,0 +1,22 @@
+<!-- visualizar dados da turma -->
+
+{% extends "master.html" %}
+
+{% block title %}
+    Detalhes sobre a {{ myturma.nome }}
+{% endblock %}
+
+{% block content %}
+
+    {% include "header.html" %}
+
+    <div class="container p-5 my-5 border"> 
+        <h1>{{ myturma.nome }}</h1>
+
+        <p>Vagas: {{ myturma.vagas }}</p>
+        <p>Curso: {{ myturma.curso }}</p>
+        <p>Data de início: {{ myturma.dataInicio }}</p>
+
+        <p>Back to <a href="/turmas">Lista das turmas</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- template de estrutura principal das páginas -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<html>
+
+  <link rel="stylesheet" href="{% static 'maincss.css' %}">
+
+  <head>
+
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+  <!-- ensure proper rendering and touch zooming on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  </head>
+
+  <body>
+
+    {% block content %}
+    {% endblock %}
+
+  </body>
+
+</html>
