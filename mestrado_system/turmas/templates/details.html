@@ -17,6 +17,10 @@
         <p>Curso: {{ myturma.curso }}</p>
         <p>Data de início: {{ myturma.dataInicio }}</p>
 
+        <div class="container p-4">
+            <a href="{% url 'editar_turma' myturma.id %}">Editar</a>
+        </div>
+
         <p>Back to <a href="/turmas">Lista das turmas</a></p>
     </div>
 {% endblock %}

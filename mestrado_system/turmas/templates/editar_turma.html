@@ -1,0 +1,32 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Editar Turma
+{% endblock %}
+
+{% block content%}
+
+  {% include "header.html" %}
+  <div class="container p-5 my-5 border"> 
+    <h5><a href="/">Página Inicial</a></h5>
+    <p></p>
+    <h1>Editar Turma</h1>
+
+    <form method="post" action="{% url 'editar_turma' turma.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Salvar Edições</button>
+    </form>
+
+    <p></p>
+
+    <form method="post" action="{% url 'excluir_turma' turma.id %}" style="display: inline-block;">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta turma?')">Excluir</button>
+    </form>
+    
+    <h1>   </h1>
+    <p> <a href="{% url 'details' turma.id %}">Voltar</a></p>
+  </div>
+
+{% endblock %}

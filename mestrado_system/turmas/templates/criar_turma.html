@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Criar Turma
+{% endblock %}
+
+{% block content %}
+  {% include "header.html" %}
+
+  <div class="container p-5 my-5 border">
+    <h5><a href="/">Página Inicial</a></h5>
+    <p></p>
+    <h1>Criar Turma</h1>
+
+    <form method="post" action="{% url 'criar_turma' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Criar Turma</button>
+      <p> </p>
+      <p> <a href="{% url 'turmas'%}">Voltar</a></p>
+    </form>
+  </div>
+{% endblock %}
