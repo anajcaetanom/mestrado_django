@@ -11,16 +11,17 @@
     {% include "header.html" %}
 
     <div class="container p-5 my-5 border"> 
+        <h5><a href="/">Página Inicial</a></h5>
         <h1>{{ myturma.nome }}</h1>
 
         <p>Vagas: {{ myturma.vagas }}</p>
         <p>Curso: {{ myturma.curso }}</p>
-        <p>Data de início: {{ myturma.dataInicio }}</p>
+        <p>Data de início: {{ myturma.data_de_inicio }}</p>
 
-        <div class="container p-4">
+        <div class="container p-1 my-3">
             <a href="{% url 'editar_turma' myturma.id %}">Editar</a>
         </div>
 
-        <p>Back to <a href="/turmas">Lista das turmas</a></p>
+        <p>Voltar para <a href="/turmas">lista de turmas</a></p>
     </div>
 {% endblock %}

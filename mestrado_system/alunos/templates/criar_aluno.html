@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Criar Aluno
+{% endblock %}
+
+{% block content %}
+  <div class="container p-5 my-5 border">
+    <h5><a href="/">Página Inicial</a></h5>
+    <p></p>
+    <h2>Criar Aluno</h2>
+    <form method="post" action="{% url 'criar_aluno' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'alunos' %}">Voltar para Lista de Alunos</a>
+  </div>
+{% endblock %}

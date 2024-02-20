@@ -8,8 +8,9 @@
 
   {% include "header.html" %}
   <div class="container p-5 my-5 border"> 
-    <h5><a href="/">Página Inicial</a></h5>
-    <p></p>
+    <div class="container p-3 my-2 border"> 
+      <h5><a href="/">Página Inicial</a></h5>
+    </div>
     <h1>Editar Turma</h1>
 
     <form method="post" action="{% url 'editar_turma' turma.id %}">
