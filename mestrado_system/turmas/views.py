@@ -4,17 +4,20 @@ from .models import Turma
 from django.shortcuts import render, get_object_or_404
 from .forms import TurmaForm
 from django.shortcuts import redirect
+from alunos.models import Aluno
+from alunos.views import *
 
 def turmas(request):
   all_turmas = Turma.objects.all().values()
   template = loader.get_template('display_turmas.html')
-  context = {'all_turmas': all_turmas, }
+  context = {'all_turmas': all_turmas,}
   return HttpResponse(template.render(context, request))
 
 def details(request, id):
   myturma = Turma.objects.get(id=id)
+  aluno_turma = Aluno.objects.filter(curso=myturma)
   template = loader.get_template('details.html')
-  context = {'myturma': myturma, }
+  context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
   return HttpResponse(template.render(context, request))
 
 def main(request):
@@ -53,3 +56,4 @@ def excluir_turma(request, turma_id):
         return redirect('turmas')
 
     return render(request, 'excluir_turma.html', {'turma': turma})
+

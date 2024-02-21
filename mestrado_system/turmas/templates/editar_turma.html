@@ -8,9 +8,16 @@
 
   {% include "header.html" %}
   <div class="container p-5 my-5 border"> 
-    <div class="container p-3 my-2 border"> 
-      <h5><a href="/">Página Inicial</a></h5>
-    </div>
+
+    <p>
+      <a href={% url 'details' turma.id %}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
+      </a>
+    </p>
+
+
     <h1>Editar Turma</h1>
 
     <form method="post" action="{% url 'editar_turma' turma.id %}">
@@ -26,8 +33,7 @@
       <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta turma?')">Excluir</button>
     </form>
     
-    <h1>   </h1>
-    <p> <a href="{% url 'details' turma.id %}">Voltar</a></p>
+
   </div>
 
 {% endblock %}
