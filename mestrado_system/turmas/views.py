@@ -57,10 +57,3 @@ def excluir_turma(request, turma_id):
 
     return render(request, 'excluir_turma.html', {'turma': turma})
 
-def alunos_da_turma(request, id):
-    myturma = Turma.objects.get(id=id)
-    aluno_turma = Aluno.objects.filter(curso=myturma)
-    template = loader.get_template('alunos_da_turma.html')
-    context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
-    return HttpResponse(template.render(context, request))
-

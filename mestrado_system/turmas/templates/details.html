@@ -26,9 +26,7 @@
         <p>Curso: {{ myturma.curso }}</p>
         <p>Data de início: {{ myturma.data_de_inicio }}</p> 
 
-        <h5> <a href="{% url 'alunos_da_turma' myturma.id %}"> lista de alunos da turma </a> </h5>
-
-        <div class="container px-0 mt-5">
+        <div class="container px-0 mt-4">
             <a href="{% url 'editar_turma' myturma.id %}">
                 <button type="button" class="btn btn-outline-dark">
                     Editar turma
@@ -40,13 +38,17 @@
 
     <div class="container p-5 my-5 border"> 
 
-        <h5> Alunos matrículados </h5>
+        <a href="#demo" data-bs-toggle="collapse" role="button"> alunos </a>
 
-        <ul>
-            {% for aluno in aluno_turma %}
-                <li>{{ aluno.nome }}</li>
-            {% endfor %}
-        </ul>
+        <div id="demo" class="collapse">
+            <ul>
+                {% for aluno in aluno_turma %}
+                    <li>{{ aluno.nome }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        
 
     </div>
 

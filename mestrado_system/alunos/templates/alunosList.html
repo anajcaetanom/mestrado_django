@@ -26,8 +26,12 @@
             {% endfor %}
         </ul>
 
-        <div class="container p-4">
-            <a href="{% url 'criar_aluno'%}">Criar novo aluno</a>
+        <div class="container px-0 mt-4">
+            <a href="{% url 'criar_aluno'%}">
+                <button type="button" class="btn btn-outline-dark">
+                    Criar novo aluno
+                </button> 
+            </a>
         </div>
       
     </div>

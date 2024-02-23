@@ -1,29 +1,30 @@
 {% extends "master.html" %}
 
 {% block title %}
-  Criar Aluno
+    Criar Aluno
 {% endblock %}
 
 {% block content %}
-  <div class="container p-5 my-5 border">
-    <a href="{% url 'alunos' %}">
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi  bi-arrow-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-      </svg>
-    </a>
-    <h2>Criar Aluno</h2>
-    
-    <form method="post" action="{% url 'criar_aluno' %}">
-      {% csrf_token %}
-      <p><label for="id_nome">Nome:</label> {{ form.nome }}</p>
-      <p><label for="id_sobrenome">Sobrenome:</label> {{ form.sobrenome }}</p>
-      <p><label for="id_curso">Curso:</label> {{ form.curso }}</p>
-      <p><label for="id_orientador1">Orientador 1:</label> {{ form.orientador1 }}</p>
-      <p><label for="id_orientador2">Orientador 2:</label> {{ form.orientador2 }}</p>
-      <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
-      <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
-      <button type="submit">Salvar</button> 
-    </form>
-    
-  </div>
+    <div class="container p-5 my-5 border">
+        <a href="{% url 'alunos' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi    bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            </svg>
+        </a>
+
+        <h2>Criar Aluno</h2>
+        
+        <form method="post" action="{% url 'criar_aluno' %}">
+            {% csrf_token %}
+            <p><label for="id_nome">Nome:</label> {{ form.nome }}</p>
+            <p><label for="id_sobrenome">Sobrenome:</label> {{ form.sobrenome }}</p>
+            <p><label for="id_curso">Curso:</label> {{ form.curso }}</p>
+            <p><label for="id_orientador1">Orientador 1:</label> {{ form.orientador1 }}</p>
+            <p><label for="id_orientador2">Orientador 2:</label> {{ form.orientador2 }}</p>
+            <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
+            <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
+            <button type="submit">Salvar</button> 
+        </form>
+        
+    </div>
 {% endblock %}
