@@ -8,21 +8,21 @@ from alunos.models import Aluno
 from alunos.views import *
 
 def turmas(request):
-  all_turmas = Turma.objects.all().values()
-  template = loader.get_template('display_turmas.html')
-  context = {'all_turmas': all_turmas,}
-  return HttpResponse(template.render(context, request))
+    all_turmas = Turma.objects.all().values()
+    template = loader.get_template('display_turmas.html')
+    context = {'all_turmas': all_turmas,}
+    return HttpResponse(template.render(context, request))
 
 def details(request, id):
-  myturma = Turma.objects.get(id=id)
-  aluno_turma = Aluno.objects.filter(curso=myturma)
-  template = loader.get_template('details.html')
-  context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
-  return HttpResponse(template.render(context, request))
+    myturma = Turma.objects.get(id=id)
+    aluno_turma = Aluno.objects.filter(curso=myturma)
+    template = loader.get_template('details.html')
+    context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
+    return HttpResponse(template.render(context, request))
 
 def main(request):
-  template = loader.get_template('main.html')
-  return HttpResponse(template.render())
+    template = loader.get_template('main.html')
+    return HttpResponse(template.render())
 
 def editar_turma(request, turma_id):
     turma = get_object_or_404(Turma, id=turma_id)
@@ -56,4 +56,11 @@ def excluir_turma(request, turma_id):
         return redirect('turmas')
 
     return render(request, 'excluir_turma.html', {'turma': turma})
+
+def alunos_da_turma(request, id):
+    myturma = Turma.objects.get(id=id)
+    aluno_turma = Aluno.objects.filter(curso=myturma)
+    template = loader.get_template('alunos_da_turma.html')
+    context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
+    return HttpResponse(template.render(context, request))
 

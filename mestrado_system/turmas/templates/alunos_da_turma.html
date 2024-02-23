@@ -1,9 +1,7 @@
-<!-- Lista de todas as turmas -->
-
 {% extends "master.html" %}
 
 {% block title %}
-    Lista das turmas
+    Detalhes sobre a {{ myturma.nome }}
 {% endblock %}
 
 {% block content %}
@@ -11,30 +9,23 @@
     {% include "header.html" %}
 
     <div class="container p-5 my-5 border"> 
-
+        
         <p>
-            <a href="/">
+            <a href="/turmas/details/{{ myturma.id }}/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                 </svg>
             </a>
         </p>
 
-        <h2> Lista de Turmas</h2>
+        <h1> Alunos matrículados na {{ myturma.nome }}:</h1>
 
         <ul>
-            {% for x in all_turmas %}
-                <li><a href="details/{{ x.id }}"> {{ x.nome }} </a></li>
+            {% for aluno in aluno_turma %}
+                <li>{{ aluno.nome }}</li>
             {% endfor %}
         </ul>
 
-        <div class="container px-0 mt-4">
-            <a href="{% url 'criar_turma'%}">
-                <button type="button" class="btn btn-outline-dark">
-                    Criar nova turma
-                </button>
-            </a>
-        </div>
-
-  </div>
+    </div>
 {% endblock %}
+    
