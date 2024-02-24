@@ -55,5 +55,5 @@ def excluir_turma(request, turma_id):
         turma.delete()
         return redirect('turmas')
 
-    return render(request, 'excluir_turma.html', {'turma': turma})
+    return render(request, {'turma': turma})
 

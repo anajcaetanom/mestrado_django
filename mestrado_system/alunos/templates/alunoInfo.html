@@ -34,6 +34,15 @@
 
             <p>Bolsista: {{ alunoID.bolsista }}</p>
             <p>Observações: {{ alunoID.obs }}</p>
+
+            <div class="container px-0 mt-4">
+                <a href="{% url 'editar_aluno' alunoID.id %}">
+                    <button type="button" class="btn btn-outline-dark">
+                        Editar aluno
+                    </button>    
+                </a>
+            </div>
+
         </div>
 
     </div>
