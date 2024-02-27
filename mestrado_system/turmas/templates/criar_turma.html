@@ -7,10 +7,11 @@
 {% block content %}
     {% include "header.html" %}
 
-    <div class="container p-5 my-5 border">
-        
-        <div class="row">
-            <div class="col">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="container p-5 my-5 border">
+    
                 <p>
                     <a href="/turmas">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -18,26 +19,36 @@
                         </svg>
                     </a>
                 </p>
-            </div>
-            <div class="col">
-                <h1>Criar Turma</h1>
-            </div>
-            <div class="col">.col</div>
-        </div> 
-        
-
-        <form method="post" action="{% url 'criar_turma' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-outline-dark"> Criar Turma </button>
             
-            <p> 
-                <a href="{% url 'turmas'%}">
-                    <button type="button" class="btn btn-outline-dark">
-                        Voltar
-                    </button>
-                </a>
-            </p>
-        </form>
-    </div>
+            
+                <h1>Criar Turma</h1>
+                    
+                
+        
+                <form method="post" action="{% url 'criar_turma' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-outline-success"> Criar Turma </button>
+                    
+                    <h2> </h2>
+
+                    <p> 
+                        <a href="{% url 'turmas'%}">
+                            <button type="button" class="btn btn-outline-dark">
+                                Voltar
+                            </button>
+                        </a>
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col"></div>
+
+      </div>
+
+    
 {% endblock %}

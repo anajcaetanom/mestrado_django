@@ -7,30 +7,30 @@
 
 <html>
 
-  <link rel="stylesheet" href="{% static 'maincss.css' %}">
+    <link rel="stylesheet" href="{% static 'maincss.css' %}">
 
-  <head>
+    <head>
 
     <title>
-      {% block title %}
-      {% endblock %}
+        {% block title %}
+        {% endblock %}
     </title>
 
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 
-  <!-- ensure proper rendering and touch zooming on mobile devices -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- ensure proper rendering and touch zooming on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  </head>
+    </head>
 
-  <body>
+    <body>
 
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
 
-  </body>
+    </body>
 
 </html>
