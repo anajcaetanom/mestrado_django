@@ -9,3 +9,5 @@ class Aluno(models.Model):
     orientador2 = models.CharField(max_length=255, null=True, blank=True)
     bolsista = models.CharField(max_length=255)
     obs = models.TextField()
+    email = models.EmailField(max_length = 255, null=True)
+    matricula = models.CharField(max_length=20, null=True)

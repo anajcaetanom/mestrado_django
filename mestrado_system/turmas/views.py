@@ -18,7 +18,7 @@ def details(request, id):
     aluno_turma = Aluno.objects.filter(curso=myturma)
     template = loader.get_template('details.html')
     context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
-    return HttpResponse(template.render(context, request))
+    return render(request, "details.html", context)
 
 def main(request):
     template = loader.get_template('main.html')

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'turmas',
     'alunos',
     'bootstrap5',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
