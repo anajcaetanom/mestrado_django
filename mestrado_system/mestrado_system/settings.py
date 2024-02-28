@@ -14,6 +14,9 @@ from pathlib import Path
 
 es_formats.DATE_FORMAT = 'd-m-y'
 
+LOGIN_URL= '/login/'
+LOGIN_REDIRECT_URL = '/'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'turmas',
     'alunos',
+    'docentes',
+    'users',
     'bootstrap5',
     'widget_tweaks',
 ]

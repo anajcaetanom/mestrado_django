@@ -11,3 +11,6 @@ class Aluno(models.Model):
     obs = models.TextField()
     email = models.EmailField(max_length = 255, null=True)
     matricula = models.CharField(max_length=20, null=True)
+
+    def __str__(self):
+        return f"{self.nome} {self.sobrenome}"

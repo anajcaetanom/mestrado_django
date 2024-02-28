@@ -6,6 +6,9 @@ from .forms import TurmaForm
 from django.shortcuts import redirect
 from alunos.models import Aluno
 from alunos.views import *
+from django.contrib.auth.decorators import login_required
+from users.templates import *
+from users.urls import *
 
 def turmas(request):
     all_turmas = Turma.objects.all().values()
@@ -16,14 +19,13 @@ def turmas(request):
 def details(request, id):
     myturma = Turma.objects.get(id=id)
     aluno_turma = Aluno.objects.filter(curso=myturma)
-    template = loader.get_template('details.html')
     context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
     return render(request, "details.html", context)
 
 def main(request):
-    template = loader.get_template('main.html')
-    return HttpResponse(template.render())
+    return render(request, "main.html")
 
+@login_required
 def editar_turma(request, turma_id):
     turma = get_object_or_404(Turma, id=turma_id)
     
@@ -37,7 +39,9 @@ def editar_turma(request, turma_id):
 
     return render(request, 'editar_turma.html', {'form': form, 'turma': turma})
 
+@login_required
 def criar_turma(request):
+
     if request.method == 'POST':
         form = TurmaForm(request.POST)
         if form.is_valid():
@@ -48,6 +52,7 @@ def criar_turma(request):
 
     return render(request, 'criar_turma.html', {'form': form})
 
+@login_required
 def excluir_turma(request, turma_id):
     turma = get_object_or_404(Turma, id=turma_id)
     

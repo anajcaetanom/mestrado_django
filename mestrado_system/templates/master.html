@@ -3,26 +3,32 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="pt-BR">
 
-<html>
+<html lang="pt-BR">
 
     <link rel="stylesheet" href="{% static 'maincss.css' %}">
 
     <head>
 
-    <title>
-        {% block title %}
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+
+        {% block meta %}
+            <!-- ensure proper rendering and touch zooming on mobile devices -->
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <!-- comunica aos navegadores qual é o formato de codificação de caracteres utilizado -->
+            <meta charset="utf-8">
+
+            <!-- vai forçar o navegador a renderizar com o modo mais recente do navegador atual. -->
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
         {% endblock %}
-    </title>
-
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-
-    <!-- ensure proper rendering and touch zooming on mobile devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
     </head>
 

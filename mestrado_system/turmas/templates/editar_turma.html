@@ -32,7 +32,10 @@
 
                 <form method="post" action="{% url 'editar_turma' turma.id %}">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <p><label for="id_nome">Nome:</label> {{ form.nome }}</p>
+                    <p><label for="id_curso">Curso:</label> {{ form.curso }}</p>
+                    <p><label for="id_Vagas">Vagas:</label> {{ form.vagas }}</p>
+                    <p><label for="id_data_de_inicio">Data:</label> {{ form.data_de_inicio }}</p>
                     <button type="submit" class="btn btn-outline-success">Salvar Edições</button>
                 </form>
 
