@@ -6,5 +6,6 @@ urlpatterns = [
     path('' , include('turmas.urls')),
     path('' , include('alunos.urls')),
     path('' , include('users.urls')),
+    path('' , include('docentes.urls')),
     path('admin/', admin.site.urls),
 ]

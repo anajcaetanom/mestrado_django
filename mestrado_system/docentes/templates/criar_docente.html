@@ -1,7 +1,7 @@
 {% extends "master.html" %}
 
 {% block title %}
-    Criar Aluno
+    Criar Docente
 {% endblock %}
 
 {% block content %}
@@ -13,28 +13,22 @@
 
                 <div class="row mb-4">
                     <div class="col">
-                        <a href="{% url 'alunos' %}">
+                        <a href="{% url 'docentes' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi    bi-arrow-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                             </svg>
                         </a>
                     </div>
                     <div class="col-6">
-                        <h2 class="text-center">Criar Aluno</h2>
+                        <h2 class="text-center">Criar Docente</h2>
                     </div>
                     <div class="col"></div>
                 </div> 
 
-                <form method="post" action="{% url 'criar_aluno' %}">
+                <form method="post" action="{% url 'criar_docente' %}">
                     {% csrf_token %}
                     <p><label for="id_nome">Nome:</label> {{ form.nome }}</p>
                     <p><label for="id_sobrenome">Sobrenome:</label> {{ form.sobrenome }}</p>
-                    <p><label for="id_curso">Curso:</label> {{ form.curso }}</p>
-                    <p><label for="id_orientador1">Orientadores:</label> {{ form.orientadores }}</p>
-                    <p><label for="id_email">E-mail:</label> {{form.email}} </p>
-                    <p><label for="id_matricula">Matrícula:</label> {{form.matricula}} </p>
-                    <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
-                    <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
                     <button type="submit" class="btn btn-outline-success">Salvar</button> 
                 </form>
                 
