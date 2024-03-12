@@ -14,7 +14,8 @@ def docentes(request):
 def docenteInfo(request, id):
     docenteID = get_object_or_404(Docente, id=id)
     template = loader.get_template('docenteInfo.html')
-    context = {'docenteID': docenteID, }
+    alunos_orientados = docenteID.alunos_orientados.all()
+    context = {'docenteID': docenteID, 'alunos_orientados': alunos_orientados }
     return HttpResponse(template.render(context, request))
 
 @login_required

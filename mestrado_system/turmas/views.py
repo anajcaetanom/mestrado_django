@@ -7,7 +7,6 @@ from django.shortcuts import redirect
 from alunos.models import Aluno
 from alunos.views import *
 from django.contrib.auth.decorators import login_required
-from users.templates import *
 from users.urls import *
 
 def turmas(request):
