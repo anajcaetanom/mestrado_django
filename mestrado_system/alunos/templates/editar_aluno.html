@@ -31,13 +31,32 @@
                 <form method="post" action="{% url 'editar_aluno' aluno.id %}">
                     {% csrf_token %}
                     <p><label for="id_nome">Nome:</label> {{ form.nome }}</p>
+
                     <p><label for="id_sobrenome">Sobrenome:</label> {{ form.sobrenome }}</p>
+
                     <p><label for="id_curso">Curso:</label> {{ form.curso }}</p>
+
                     <p><label for="id_orientador1">Orientadores:</label> {{ form.orientadores }}</p>
-                    <p><label for="id_email">E-mail:</label> {{form.email}} </p>
-                    <p><label for="id_matricula">Matrícula:</label> {{form.matricula}} </p>
+
+                    <p><label for="id_email">E-mail:</label> {{ form.email }} </p>
+
+                    <p><label for="id_matricula">Matrícula:</label> {{ form.matricula }} </p>
+
                     <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
+
+                    <p><label for="id_defesa">Defendeu:</label> 
+                        <input type="checkbox" id="id_defesa" name="defesa" {% if form.defesa.value %} checked {% endif %} onchange="toggleArtigoField()">
+                    </p>
+
+                    <div id="artigoField" style="display: {% if form.defesa.value %}block{% else %}none{% endif %};">
+                        <p><label for="id_artigo">Artigo:</label> 
+                            <input type="text" id="id_artigo" name="artigo" value="{{ form.artigo.value }}">
+                            <span id="urlError" style="color: red;"></span>
+                        </p>
+                    </div>
+
                     <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
+
                     <button type="submit" class="btn btn-outline-success">Salvar Edições</button>
                 </form>
     
@@ -45,7 +64,7 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-danger mt-2" onclick="return confirm('Tem certeza que deseja excluir este aluno?')">Excluir aluno</button>
                 </form>
-        
+                
     
             </div>
         </div>
@@ -53,6 +72,35 @@
     </div> 
 
 
-    
+    <script>
+        function toggleArtigoField() {
+            var artigoField = document.getElementById("artigoField");
+            var checkBox = document.getElementById("id_defesa");
+            if (checkBox.checked) {
+                artigoField.style.display = "block";
+            } else {
+                artigoField.style.display = "none";
+            }
+        }
+
+        function validarURL() {
+            var urlInput = document.getElementById("id_artigo");
+            var urlError = document.getElementById("urlError");
+            var urlErrorMessage = document.getElementById("urlErrorMessage"); // Adicione esta linha
+            var url = urlInput.value.trim();
+            
+            var urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+        
+            if (!urlPattern.test(url)) {
+                urlErrorMessage.style.display = "block"; // Exibe a mensagem de erro
+                urlInput.focus();
+                return false;
+            } else {
+                urlErrorMessage.style.display = "none"; // Oculta a mensagem de erro
+                return true;
+            }
+        }
+        }
+    </script>
 
 {% endblock %}

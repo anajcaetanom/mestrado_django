@@ -21,7 +21,7 @@
                             </svg>    
                         </a>
                     </div>
-                    <div class="col-6">
+                    <div class="col-8">
                         <h2 class="text-center">
                             {{ docenteID.nome }} {{ docenteID.sobrenome }}
                         </h2>
@@ -32,15 +32,9 @@
                 <p>E-mail: {{ docenteID.email }}</p>
                 <p>Orientados: 
                     {% for orientados in alunos_orientados %}
-                    {{ orientados }}
-                  
-                    {% if forloop.counter == alunos_orientados|length|add:-1 %}
-                      e
-                    {% elif not forloop.last %}
-                      ,
-                    {% endif %}
-                  {% endfor %}
-                <p>
+                        {{orientados}}{% if forloop.counter == alunos_orientados|length|add:-1 %} e {% elif not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
                 <div class="container px-0 mt-4">
                     <a href="{% url 'editar_docente' docenteID.id %}">
                         <button type="button" class="btn btn-outline-dark">

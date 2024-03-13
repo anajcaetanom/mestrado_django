@@ -40,7 +40,9 @@ def editar_aluno(request, aluno_id):
             return redirect('alunoInfo', id=aluno.id)
     else:
         form = AlunoForm(instance=aluno)
-        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
+        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno}) 
+    
+        
 
 @login_required 
 def excluir_aluno(request, aluno_id):

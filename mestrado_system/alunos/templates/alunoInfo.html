@@ -51,7 +51,15 @@
                 <p>E-mail: {{ alunoID.email }}</p>
                 <p>Matrícula: {{ alunoID.matricula }}</p>
                 <p>Bolsista: {{ alunoID.bolsista }}</p>
+                <p>Defendeu:
+                    {% if alunoID.defesa%}
+                    Sim <p><a href="{{ alunoID.artigo }}"> <button type="button" style="width:10;height:10" class="btn btn-outline-info">Acessar artigo</button></a></p>
+                    {%else%}
+                    Não
+                    {% endif %}
+                </p>
                 <p>Observações: {{ alunoID.obs }}</p>
+                
     
                 <div class="container px-0 mt-4">
                     <a href="{% url 'editar_aluno' alunoID.id %}">

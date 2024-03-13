@@ -6,8 +6,10 @@ class Aluno(models.Model):
     sobrenome = models.CharField(max_length=255)
     curso = models.ForeignKey(Turma, on_delete=models.SET_NULL, null=True)
     orientadores = models.ManyToManyField('docentes.Docente', related_name='alunos_orientados')
+    defesa = models.BooleanField(default=False)
+    artigo = models.URLField(max_length=400, null=True, blank=True)
     bolsista = models.CharField(max_length=255)
-    obs = models.TextField()
+    obs = models.TextField(max_length=255)
     email = models.EmailField(max_length=255, null=True)
     matricula = models.CharField(max_length=20, null=True)
 
