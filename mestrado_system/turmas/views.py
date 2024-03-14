@@ -17,8 +17,10 @@ def turmas(request):
 
 def details(request, id):
     myturma = Turma.objects.get(id=id)
+    aluno_defendeu = Aluno.objects.filter(defesa=True, curso=myturma)
+    contador = Aluno.objects.filter(defesa=True, curso=myturma).count()
     aluno_turma = Aluno.objects.filter(curso=myturma)
-    context = {'myturma': myturma, 'aluno_turma' : aluno_turma}
+    context = {'myturma': myturma, 'aluno_turma' : aluno_turma, 'aluno_defendeu': aluno_defendeu, 'contador': contador}
     return render(request, "details.html", context)
 
 def main(request):

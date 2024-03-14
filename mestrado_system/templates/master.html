@@ -18,15 +18,16 @@
         {% load bootstrap5 %}
         {% bootstrap_css %}
         {% bootstrap_javascript %}
+        <script src="mainjs.js"></script>
 
         {% block meta %}
             <!-- ensure proper rendering and touch zooming on mobile devices -->
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <!-- comunica aos navegadores qual é o formato de codificação de caracteres utilizado -->
+            <!-- tells browser which character encoding format is used -->
             <meta charset="utf-8">
 
-            <!-- vai forçar o navegador a renderizar com o modo mais recente do navegador atual. -->
+            <!-- force Internet Explorer (IE) to use the latest version of the rendering engine -->
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
         {% endblock %}
 

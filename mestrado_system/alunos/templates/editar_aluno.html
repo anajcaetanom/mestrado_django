@@ -13,7 +13,7 @@
         <div class="col">
             
             <div class="container p-5 my-5 border"> 
-
+                <!-- back button -->
                 <div class="row mb-4">
                     <div class="col">
                         <a href={% url 'alunoInfo' aluno.id %}>
@@ -27,7 +27,8 @@
                     </div>
                     <div class="col"></div>
                 </div> 
-
+                
+                <!-- forms -->
                 <form method="post" action="{% url 'editar_aluno' aluno.id %}">
                     {% csrf_token %}
                     <p><label for="id_nome">Nome:</label> {{ form.nome }}</p>
@@ -70,37 +71,5 @@
         </div>
         <div class="col"></div>
     </div> 
-
-
-    <script>
-        function toggleArtigoField() {
-            var artigoField = document.getElementById("artigoField");
-            var checkBox = document.getElementById("id_defesa");
-            if (checkBox.checked) {
-                artigoField.style.display = "block";
-            } else {
-                artigoField.style.display = "none";
-            }
-        }
-
-        function validarURL() {
-            var urlInput = document.getElementById("id_artigo");
-            var urlError = document.getElementById("urlError");
-            var urlErrorMessage = document.getElementById("urlErrorMessage"); // Adicione esta linha
-            var url = urlInput.value.trim();
-            
-            var urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
-        
-            if (!urlPattern.test(url)) {
-                urlErrorMessage.style.display = "block"; // Exibe a mensagem de erro
-                urlInput.focus();
-                return false;
-            } else {
-                urlErrorMessage.style.display = "none"; // Oculta a mensagem de erro
-                return true;
-            }
-        }
-        }
-    </script>
 
 {% endblock %}

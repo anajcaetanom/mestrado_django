@@ -41,6 +41,7 @@
                     </a>
                 </div>
         
+                <!-- alunos que fazem parte da turma -->
                 <div class="text-center mt-4">
                     <button class="btn btn-outline-primary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#demo" aria-expanded="false" aria-controls="demo">
                         Ver Alunos
@@ -55,7 +56,26 @@
                     </ul>
                 </div>
 
-            
+                <!--######################## FILTROS ########################-->
+
+                <!-- alunos da turma que já defenderam -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-primary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#def" aria-expanded="false" aria-controls="def">
+                        alunos q defenderam
+                    </button>
+                </div>
+
+                <div id="def" class="collapse">
+                    <p> total: {{ contador }} </p>
+                    <ul>
+                        {% for aluno in aluno_defendeu %}
+                            <li> <a href="/alunos/alunoInfo/{{ aluno.id }}/">{{ aluno.nome }} {{ aluno.sobrenome }}</a> </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                
+
             </div>
 
         </div>

@@ -33,7 +33,7 @@
                     <p><label for="id_nome">Nome:</label> {{ form.nome }}</p>
                     <p><label for="id_sobrenome">Sobrenome:</label> {{ form.sobrenome }}</p>
                     <p><label for="id_email">E-mail:</label> {{form.email}}
-                    <button type="submit" class="btn btn-outline-success">Salvar Edições</button>
+                    <p> <button type="submit" class="btn btn-outline-success">Salvar Edições</button> </p>
                 </form>
     
                 <form method="post" action="{% url 'excluir_docente' docente.id %}" style="display: inline-block;">
