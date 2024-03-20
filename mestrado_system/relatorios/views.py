@@ -4,8 +4,7 @@ from alunos.models import Aluno
 # Create your views here.
 
 def relatorioslist(request):
-    return render(request, "relatorioslist.html")
-
-def defesaQtd(request):
-  contador = Aluno.objects.filter(defesa=True).count()
-  return render(request, 'defesaCount.html', {'contador' : contador})
+    defenderam = Aluno.objects.filter(defesa=True).count()
+    aluno = Aluno.objects.all().values().count()
+    media = f'{(defenderam/aluno)*100:.2f}'
+    return render(request, "relatorioslist.html", {'defenderam' : defenderam, 'media' : media})

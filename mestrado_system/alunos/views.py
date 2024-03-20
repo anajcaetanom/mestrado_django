@@ -7,8 +7,9 @@ from django.contrib.auth.decorators import login_required
 
 def alunos(request):
     alunosValues = Aluno.objects.all().values()
+    aluno_defendeu = Aluno.objects.filter(defesa=True)
     template = loader.get_template('alunosList.html')
-    context = {'alunosValues': alunosValues, }
+    context = {'alunosValues': alunosValues, 'aluno_defendeu': aluno_defendeu}
     return HttpResponse(template.render(context, request))
 
 def alunoInfo(request, id):
