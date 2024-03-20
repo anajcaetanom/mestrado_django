@@ -30,14 +30,14 @@
                 </div> 
       
                 <p>E-mail: {{ docenteID.email }}</p>
-                {%if alunos_orientados.cont > 0%}
+                {%if alunos_orientados.count > 0 %}
                     <p>Orientados: 
                         {% for orientados in alunos_orientados %}
-                            {{orientados}}{% if forloop.counter == alunos_orientados|length|add:-1 %} e {% elif not forloop.last %}, {% endif %}
+                            {{orientados}} {% if forloop.counter == alunos_orientados|length|add:-1 %} e {% elif not forloop.last %}, {% endif %}
                         {% endfor %}
                     </p>
                 {% else %}
-                <p> Orientados: Nenhum </p>
+                    <p> Orientados: Nenhum </p>
                 {%endif%}
                 <div class="container px-0 mt-4">
                     <a href="{% url 'editar_docente' docenteID.id %}">

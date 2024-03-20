@@ -27,9 +27,9 @@
                     <div class="col"></div>
                   </div> 
 
-                <ul>
+                <ul class="list-group list-group-flush">
                     {% for x in alunosValues %}
-                    <li> <a href="alunoInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
+                    <li class="list-group-item"> <a href="alunoInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
                     {% endfor %}
                 </ul>
         
