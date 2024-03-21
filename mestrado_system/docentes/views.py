@@ -4,12 +4,36 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Docente
 from .forms import DocenteForm
+from django.db.models import Q
 
 def docentes(request):
-    docentesValues = Docente.objects.all().values()
-    template = loader.get_template('docentesList.html')
-    context = {'docentesValues': docentesValues, }
-    return HttpResponse(template.render(context, request))
+    query = request.GET.get('q')
+    if query:
+        # Dividindo a consulta em palavras-chave
+        keywords = query.split()
+        
+        # Criando uma lista de Q objects para pesquisa flexível
+        query_list = []
+        for keyword in keywords:
+            query_list.append(Q(nome__icontains=keyword) | Q(sobrenome__icontains=keyword))
+        
+        # Combinando os Q objects usando operador OR
+        pesquisa = Q()
+        for query_item in query_list:
+            pesquisa |= query_item
+        
+        # Realizando a consulta no banco de dados
+        docentesValues = Docente.objects.filter(pesquisa)
+    else:
+        docentesValues = Docente.objects.all()
+    
+    context = {'docentesValues': docentesValues}
+    return render(request, 'docentesList.html', context)
+
+
+
+
+
 
 def docenteInfo(request, id):
     docenteID = get_object_or_404(Docente, id=id)

@@ -46,7 +46,7 @@
                     <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
 
                     <p><label for="id_defesa">Defendeu:</label> 
-                        <input type="checkbox" id="id_defesa" name="defesa" {% if form.defesa.value %} checked {% endif %} onchange="toggleArtigoField()">
+                        <input type="checkbox" id="id_defesa" name="defesa" onclick="showArtigoField()">
                     </p>
 
                     <div id="artigoField" style="display: {% if form.defesa.value %}block{% else %}none{% endif %};">
@@ -71,5 +71,7 @@
         </div>
         <div class="col"></div>
     </div> 
+
+    <script src="js/script.js"></script>
 
 {% endblock %}

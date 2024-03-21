@@ -27,6 +27,11 @@
                     <div class="col"></div>
                   </div> 
 
+                  <form method="GET">
+                    <input type="text" name="q" placeholder="Buscar docente">
+                    <button type="submit">Buscar</button>
+                  </form>
+
                 <ul>
                     {% for x in docentesValues %}
                     <li> <a href="docenteInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>

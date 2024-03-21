@@ -1,14 +1,22 @@
-function toggleArtigoField() {
-    var artigoDate = document.getElementById("");
-    var artigoField = document.getElementById("artigoField");
-    var checkBox = document.getElementById("id_defesa");
-    if (checkBox.checked) {
-        artigoField.style.display = "block";
-    } else {
-        artigoField.style.display = "none";
-    }
-}
+// ############## JavaScript Functions ############## 
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Show "artigo" field only if "defesa" checkbox is checked.
+    function showArtigoField() {
+        var checkBox = document.getElementById("id_defesa");
+        var artigoField = document.getElementById("artigoField");
+        var artigoDate = document.getElementById("");
+        
+        if (checkBox.checked) {
+            artigoField.style.display = "block";
+        } else {
+            artigoField.style.display = "none";
+        }
+    }
+}, false);
+
+
+/*
 function validarURL() {
     var urlInput = document.getElementById("id_artigo");
     var urlError = document.getElementById("urlError");
@@ -27,3 +35,4 @@ function validarURL() {
         return true;
     }
 }
+*/

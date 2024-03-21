@@ -27,6 +27,12 @@
                     <div class="col"></div>
                   </div> 
 
+                  <form method="GET">
+                    <input type="text" name="aluno" placeholder="Buscar aluno">
+                    <button type="submit">Buscar</button>
+                </form>
+                
+
                 <ul class="list-group list-group-flush">
                     {% for x in alunosValues %}
                     <li class="list-group-item"> <a href="alunoInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
