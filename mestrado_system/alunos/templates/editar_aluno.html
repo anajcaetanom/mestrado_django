@@ -1,5 +1,5 @@
 {% extends "master.html" %}
-
+{% load static %}
 {% block title %}
     Editar Aluno
 {% endblock %}
@@ -7,6 +7,10 @@
 {% block content%}
 
     {% include "header.html" %}
+
+    {% if messages %}
+    
+    {% endif %}
 
     <div class="row">
         <div class="col"></div>
@@ -28,6 +32,8 @@
                     <div class="col"></div>
                 </div> 
                 
+    
+
                 <!-- forms -->
                 <form method="post" action="{% url 'editar_aluno' aluno.id %}">
                     {% csrf_token %}
@@ -46,10 +52,10 @@
                     <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
 
                     <p><label for="id_defesa">Defendeu:</label> 
-                        <input type="checkbox" id="id_defesa" name="defesa" onclick="showArtigoField()">
+                        <input type="checkbox" id="id_defesa" name="defesa" {% if aluno.defesa %}checked{% endif %} onclick="showArtigoField()">
                     </p>
-
-                    <div id="artigoField" style="display: {% if form.defesa.value %}block{% else %}none{% endif %};">
+                    
+                    <div id="artigoField" style="display:none;">
                         <p><label for="id_artigo">Artigo:</label> 
                             <input type="text" id="id_artigo" name="artigo" value="{{ form.artigo.value }}">
                             <span id="urlError" style="color: red;"></span>
@@ -65,13 +71,12 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-danger mt-2" onclick="return confirm('Tem certeza que deseja excluir este aluno?')">Excluir aluno</button>
                 </form>
-                
     
             </div>
         </div>
         <div class="col"></div>
     </div> 
 
-    <script src="js/script.js"></script>
-
+    <script src="{% static 'js/script.js' %}"></script>
+    
 {% endblock %}

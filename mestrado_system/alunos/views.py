@@ -5,6 +5,7 @@ from .models import Aluno
 from .forms import AlunoForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib import messages
 
 def alunos(request):
     query = request.GET.get('aluno')
@@ -59,6 +60,10 @@ def editar_aluno(request, aluno_id):
         if form.is_valid():
             form.save()
             return redirect('alunoInfo', id=aluno.id)
+        else:
+            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
+            # Re-renderize o formulário com os erros
+            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
     else:
         form = AlunoForm(instance=aluno)
         return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno}) 
