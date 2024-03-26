@@ -53,7 +53,10 @@
                 <p>Bolsista: {{ alunoID.bolsista }}</p>
                 <p>Defendeu:
                     {% if alunoID.defesa%}
-                    Sim <p><a href="{{ alunoID.artigo }}"> <button type="button" style="width:10;height:10" class="btn btn-outline-info">Acessar artigo</button></a></p>
+                    Sim</p>
+                    <p>Data de defesa: {{alunoID.data_defesa}} <br>
+                    <p><a href="{{ alunoID.artigo }}">
+                    <button type="button" style="width:10;height:10" class="btn btn-outline-info">Acessar artigo</button></a></p>
                     {%else%}
                     Não
                     {% endif %}

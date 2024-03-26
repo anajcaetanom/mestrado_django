@@ -1,0 +1,14 @@
+<form method="GET" action="{% url 'filtrar_alunos' %}">
+  {{ form.as_p }}
+  <button type="submit">Filtrar</button>
+</form>
+
+{% if alunos %}
+  <ul>
+  {% for aluno in alunos %}
+      <li>{{ aluno.nome }} {{ aluno.sobrenome }} - {{ aluno.data_defesa }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>Nenhum aluno encontrado.</p>
+{% endif %}

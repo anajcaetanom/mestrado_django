@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from .models import Aluno
-from .forms import AlunoForm
+from .forms import AlunoForm, FiltroDataForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
@@ -79,3 +79,23 @@ def excluir_aluno(request, aluno_id):
         return redirect('alunos')
 
     return render(request, {'aluno': aluno})
+
+def filtrar_alunos(request):
+    if request.method == 'GET':
+        form = FiltroDataForm(request.GET)
+        if form.is_valid():
+            data_inicio = form.cleaned_data.get('data_inicio')
+            data_fim = form.cleaned_data.get('data_fim')
+            
+            # Filtre os alunos com base nas datas fornecidas
+            alunos = Aluno.objects.all()
+            if data_inicio:
+                alunos = alunos.filter(data_defesa__gte=data_inicio)
+            if data_fim:
+                alunos = alunos.filter(data_defesa__lte=data_fim)
+            
+            return render(request, 'teste.html', {'alunos': alunos, 'form': form})
+    else:
+        form = FiltroDataForm()
+
+    return render(request, 'teste.html', {'form': form})
