@@ -16,17 +16,24 @@
         
         <div class="col p-5 my-5 border">
              
-            <strong> <p> Quantidade de alunos que defenderam = {{defenderam}} </p>
-            <p> Média de alunos que defenderam = {{media}} </p> </strong>
             <form method="GET">
-                <input type="text" name="q" placeholder="Buscar produto">
+                <input type="text" name="q" placeholder="Buscar aluno">
                 <button type="submit">Buscar</button>
               </form>
+
+              <strong>
+                <p> Quantidade de alunos que defenderam = {{alunos|length}} </p> 
+                <p> Média de alunos que defenderam = {{media}}% </p>
+              </strong>
               
               <ul>
-              {% for aluno in alunos %}
-                <li>{{ aluno.nome }} {{ aluno.sobrenome }} - Defesa: {{ aluno.data_defesa|date:"d/m/Y" }}
-              {% endfor %}
+                {% for aluno in alunos %} 
+                  {%if aluno.defesa %}
+                    <li>{{ aluno.nome }} {{ aluno.sobrenome }} - Defesa: {{ aluno.data_defesa|date:"d/m/Y" }}
+                  {%else%}
+                    <li>{{ aluno.nome }} {{ aluno.sobrenome }} - Não defendeu.
+                  {%endif%}
+                {% endfor %}
               </ul>
             
 

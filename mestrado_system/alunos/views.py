@@ -29,8 +29,9 @@ def alunos(request):
         alunosValues = Aluno.objects.all()
 
     aluno_defendeu = Aluno.objects.filter(defesa=True)
+    contador = Aluno.objects.filter(defesa=True).count()
 
-    context = {'alunosValues': alunosValues, 'aluno_defendeu': aluno_defendeu}
+    context = {'alunosValues': alunosValues, 'aluno_defendeu': aluno_defendeu, 'contador': contador}
     return render(request, 'alunosList.html', context)
 
 def alunoInfo(request, id):

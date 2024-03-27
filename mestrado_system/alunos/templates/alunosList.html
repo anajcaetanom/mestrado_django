@@ -25,34 +25,20 @@
                         <h2 class="text-center">Alunos</h2>
                     </div>
                     <div class="col"></div>
-                  </div> 
+                </div> 
 
-                  <form method="GET">
-                    <input type="text" name="aluno" placeholder="Buscar aluno">
-                    <button type="submit">Buscar</button>
-                </form>
-                
+                <div class="container px-1 my-2">
+                    <form method="GET">
+                        <input type="text" name="aluno" placeholder="Buscar aluno">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
 
                 <ul class="list-group list-group-flush">
                     {% for x in alunosValues %}
                     <li class="list-group-item"> <a href="alunoInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
                     {% endfor %}
                 </ul>
-        
-                <div class="text-center mt-4">
-                    <button class="btn btn-outline-primary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#def" aria-expanded="false" aria-controls="def">
-                        alunos q defenderam
-                    </button>
-                </div>
-
-                <div id="def" class="collapse">
-                    <p> total: {{ contador }} </p>
-                    <ul>
-                        {% for aluno in aluno_defendeu %}
-                            <li> <a href="/alunos/alunoInfo/{{ aluno.id }}/">{{ aluno.nome }} {{ aluno.sobrenome }}</a> </li>
-                        {% endfor %}
-                    </ul>
-                </div>
                 
                 <div class="container px-0 mt-4">
                     <a href="{% url 'criar_aluno'%}">
@@ -64,8 +50,46 @@
               
             </div>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <div class="row">
+                <div class="col"></div>
+
+                <div class="col-4">
+                    <div class="container p-4 my-5 border">
+                        <h5 class="text-center"> Filtros </h5>
+                        <p> Defesa: </p>
+                        <div class="form-check">
+                            <label class="form-check-label">Sim: </label>
+                            <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                        </div> 
+                        <p> Não: </p>
+                    </div>
+                </div>
+
+                <div class="col"></div>
+
+              </div>
+        </div>
+
     </div> 
 
-    
+    <!-- 
+        <div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-primary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#def" aria-expanded="false" aria-controls="def">
+                    alunos q defenderam
+                </button>
+            </div>
+
+            <div id="def" class="collapse">
+                <p> total: {{contador}} </p>
+                <ul>
+                    {% for aluno in aluno_defendeu %}
+                        <li> <a href="/alunos/alunoInfo/{{ aluno.id }}/">{{ aluno.nome }} {{ aluno.sobrenome }}</a> </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    -->
+
 {% endblock %}

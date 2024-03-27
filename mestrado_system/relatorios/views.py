@@ -9,11 +9,19 @@ def relatorioslist(request):
 def relatorio_defesa(request):
     query = request.GET.get('q')
     if query:
-        alunos = Aluno.objects.filter(nome__icontains=query)
+        alunos_filtrados = Aluno.objects.filter(nome__icontains=query)
+        defenderam = alunos_filtrados.filter(defesa=True).count()
+        total_alunos = alunos_filtrados.count()
     else:
-        alunos = Aluno.objects.all()
+        alunos_filtrados = Aluno.objects.all()
+        defenderam = alunos_filtrados.filter(defesa=True).count()
+        total_alunos = alunos_filtrados.count()
 
-    defenderam = Aluno.objects.filter(defesa=True).count()
-    aluno = Aluno.objects.all().values().count()
-    media = f'{(defenderam/aluno)*100:.2f}'
-    return render(request, "relatorio_defesa.html", {'defenderam' : defenderam, 'media' : media, 'alunos': alunos})
+    if total_alunos > 0:
+        media = (defenderam / total_alunos) * 100
+    else:
+        media = 0
+
+    return render(request, "relatorio_defesa.html", {'defenderam': defenderam, 'media': media, 'alunos': alunos_filtrados})
+
+
