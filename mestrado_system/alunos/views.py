@@ -6,9 +6,11 @@ from .forms import AlunoForm, FiltroDataForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
+from turmas.models import Turma
 
 def alunos(request):
     query = request.GET.get('aluno')
+    defendeu = request.GET.get('defendeu')
     if query:
         # Dividindo a consulta em palavras-chave
         keywords = query.split()
@@ -25,13 +27,20 @@ def alunos(request):
         
         # Realizando a consulta no banco de dados
         alunosValues = Aluno.objects.filter(pesquisa)
+
     else:
         alunosValues = Aluno.objects.all()
 
+    if defendeu == '0':
+        alunosValues = alunosValues.filter(defesa=True)
+    elif defendeu == '1':
+        alunosValues = alunosValues.filter(defesa=False)
+
     aluno_defendeu = Aluno.objects.filter(defesa=True)
     contador = Aluno.objects.filter(defesa=True).count()
+    todas_turmas = Turma.objects.all()
 
-    context = {'alunosValues': alunosValues, 'aluno_defendeu': aluno_defendeu, 'contador': contador}
+    context = {'alunosValues': alunosValues, 'aluno_defendeu': aluno_defendeu, 'contador': contador, 'turmas' : todas_turmas}
     return render(request, 'alunosList.html', context)
 
 def alunoInfo(request, id):

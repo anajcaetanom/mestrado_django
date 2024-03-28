@@ -52,23 +52,41 @@
         </div>
         <div class="col">
             <div class="row">
-                <div class="col"></div>
+                <div class="col-2"></div>
 
-                <div class="col-4">
-                    <div class="container p-4 my-5 border">
-                        <h5 class="text-center"> Filtros </h5>
-                        <p> Defesa: </p>
-                        <div class="form-check">
-                            <label class="form-check-label">Sim: </label>
-                            <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
-                        </div> 
-                        <p> Não: </p>
+                <!--############ FILTROS ############-->
+                
+                    <div class="col-4">
+                        <div class="container p-4 my-5 border">
+                            <form action="{% url 'alunos' %}" method="GET">
+                                <h5 class="text-center mb-3"> Filtros </h5>
+                                <h6>Defendeu:</h6>
+                                <div class="container pl-4">
+                                    <input type="radio" id="sim" name="defendeu" value="0" {% if request.GET.defendeu_sim %}checked{% endif %}>
+                                    <label for="sim">Sim</label>
+                                </div>
+                                <div class="container pt-0">
+                                    <input type="radio" id="nao" name="defendeu" value="1" {% if request.GET.defendeu_nao %}checked{% endif %}>
+                                    <label for="nao">Não</label>
+                                </div>
+
+                                <h6> Turmas: </h6>
+                                {% for turma in turmas %}   
+                                <div class="container pl-0"> 
+                                    <input type="checkbox" id="sim" name="defesa_sim">
+                                    <label for="sim">{{ turma.nome }}</label>
+                                </div>
+                                {% endfor %}
+
+                                <button type="submit">Filtrar</button>
+
+                            </form>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col"></div>
+                <div class="col-6"></div>
 
-              </div>
+            </div>
         </div>
 
     </div> 
