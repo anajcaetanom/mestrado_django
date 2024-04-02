@@ -11,6 +11,7 @@ from turmas.models import Turma
 def alunos(request):
     query = request.GET.get('aluno')
     defendeu = request.GET.get('defendeu')
+    turmas_selecionadas = request.GET.getlist('turma')
 
     if query:
         # Dividindo a consulta em palavras-chave
@@ -37,20 +38,22 @@ def alunos(request):
     elif defendeu == '1':
         alunosValues = alunosValues.filter(defesa=False)
 
-    aluno_defendeu = Aluno.objects.filter(defesa=True)
-    contador = Aluno.objects.filter(defesa=True).count()
+    aluno_defendeu = Aluno.objects.filter(defesa=True) # Pode ser retirado junto com a parte do html
+    contador = Aluno.objects.filter(defesa=True).count() # Pode ser retirado junto com a parte do html
+
     todas_turmas = Turma.objects.all()
 
-    nome_turma = request.GET.get('turma')
-    turmaFilter = Turma.objects.filter(nome=nome_turma)
+    turmas_query = Q()
+    for turma_id in turmas_selecionadas:
+        turmas_query |= Q(curso_id=turma_id)
+    alunosValues = alunosValues.filter(turmas_query)
 
     context = {
         'alunosValues': alunosValues, 
-        'aluno_defendeu': aluno_defendeu, 
-        'contador': contador, 
+        'aluno_defendeu': aluno_defendeu, # Pode ser retirado junto com a parte do html
+        'contador': contador, # Pode ser retirado junto com a parte do html
         'turmas': todas_turmas, 
-        'nome_turma': nome_turma,
-        'turmaFilter': turmaFilter
+        'turmas_selecionadas': turmas_selecionadas,
         }
     
     return render(request, 'alunosList.html', context)

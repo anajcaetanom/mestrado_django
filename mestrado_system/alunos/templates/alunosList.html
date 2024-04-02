@@ -73,11 +73,11 @@
                                 <h6> Turmas: </h6>
                                 {% for turma in turmas %}   
                                 <div class="container pl-0"> 
-                                    <input type="checkbox" id="turma" name="turma" value={{ turma.nome }}>
-                                    <label for="turma">{{ turma.nome }}</label>
+                                    <input type="checkbox" id="turma{{ turma.id }}" name="turma" value="{{ turma.id }}" {% if turma.id|stringformat:"s" in turmas_selecionadas %}checked{% endif %}>
+                                    <label for="turma{{ turma.id }}">{{ turma.nome }}</label>
                                 </div>
                                 {% endfor %}
-
+                                
                                 <button type="submit">Filtrar</button>
 
                             </form>
