@@ -73,8 +73,8 @@
                                 <h6> Turmas: </h6>
                                 {% for turma in turmas %}   
                                 <div class="container pl-0"> 
-                                    <input type="checkbox" id="sim" name="defesa_sim">
-                                    <label for="sim">{{ turma.nome }}</label>
+                                    <input type="checkbox" id="turma" name="turma" value={{ turma.nome }}>
+                                    <label for="turma">{{ turma.nome }}</label>
                                 </div>
                                 {% endfor %}
 

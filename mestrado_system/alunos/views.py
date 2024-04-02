@@ -11,6 +11,7 @@ from turmas.models import Turma
 def alunos(request):
     query = request.GET.get('aluno')
     defendeu = request.GET.get('defendeu')
+
     if query:
         # Dividindo a consulta em palavras-chave
         keywords = query.split()
@@ -40,7 +41,18 @@ def alunos(request):
     contador = Aluno.objects.filter(defesa=True).count()
     todas_turmas = Turma.objects.all()
 
-    context = {'alunosValues': alunosValues, 'aluno_defendeu': aluno_defendeu, 'contador': contador, 'turmas' : todas_turmas}
+    nome_turma = request.GET.get('turma')
+    turmaFilter = Turma.objects.filter(nome=nome_turma)
+
+    context = {
+        'alunosValues': alunosValues, 
+        'aluno_defendeu': aluno_defendeu, 
+        'contador': contador, 
+        'turmas': todas_turmas, 
+        'nome_turma': nome_turma,
+        'turmaFilter': turmaFilter
+        }
+    
     return render(request, 'alunosList.html', context)
 
 def alunoInfo(request, id):
