@@ -60,11 +60,13 @@
                         <div class="container p-4 my-5 border">
                             <form action="{% url 'alunos' %}" method="GET">
                                 <h5 class="text-center mb-3"> Filtros </h5>
+
                                 <h6>Defendeu:</h6>
                                 <div class="container pl-4">
                                     <input type="radio" id="sim" name="defendeu" value="0" {% if request.GET.defendeu_sim %}checked{% endif %}>
                                     <label for="sim">Sim</label>
                                 </div>
+
                                 <div class="container pt-0">
                                     <input type="radio" id="nao" name="defendeu" value="1" {% if request.GET.defendeu_nao %}checked{% endif %}>
                                     <label for="nao">Não</label>
@@ -73,7 +75,7 @@
                                 <h6> Turmas: </h6>
                                 {% for turma in turmas %}   
                                 <div class="container pl-0"> 
-                                    <input type="checkbox" id="turma{{ turma.id }}" name="turma" value="{{ turma.id }}" {% if turma.id|stringformat:"s" in turmas_selecionadas %}checked{% endif %}>
+                                    <input type="checkbox" id="turma{{ turma.id }}" name="turma" value="{{ turma.id }}" {% if turma.id in turmas_selecionadas %}checked{% endif %}>
                                     <label for="turma{{ turma.id }}">{{ turma.nome }}</label>
                                 </div>
                                 {% endfor %}
@@ -90,24 +92,5 @@
         </div>
 
     </div> 
-
-    <!-- 
-        <div>
-            <div class="text-center mt-4">
-                <button class="btn btn-outline-primary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#def" aria-expanded="false" aria-controls="def">
-                    alunos q defenderam
-                </button>
-            </div>
-
-            <div id="def" class="collapse">
-                <p> total: {{contador}} </p>
-                <ul>
-                    {% for aluno in aluno_defendeu %}
-                        <li> <a href="/alunos/alunoInfo/{{ aluno.id }}/">{{ aluno.nome }} {{ aluno.sobrenome }}</a> </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    -->
 
 {% endblock %}
