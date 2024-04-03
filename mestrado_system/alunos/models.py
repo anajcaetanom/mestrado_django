@@ -16,3 +16,16 @@ class Aluno(models.Model):
 
     def __str__(self):
         return f"{self.nome} {self.sobrenome}"
+
+class Jubilado(Aluno):
+    motivo = models.CharField(max_length=255)
+    data_jubilamento = models.DateField(auto_now_add=True)
+    
+class Desistente(Aluno):
+    motivo = models.CharField(max_length=255)
+    data_desistencia = models.DateField(auto_now_add=True)
+    
+class Trancamento(Aluno):
+    motivo = models.CharField(max_length=255, blank=True)
+    data_trancamento = models.DateField(auto_now_add=True)
+    semestre_retorno = models.DateField(max_length=50, blank=True)
