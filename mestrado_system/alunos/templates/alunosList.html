@@ -39,6 +39,14 @@
                     <li class="list-group-item"> <a href="alunoInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
                     {% endfor %}
                 </ul>
+
+                <h5 class="mt-3"> DESISTENTES </h5>
+
+                <ul class="list-group list-group-flush">
+                    {% for x in alunosDesistentes %}
+                    <li class="list-group-item"> {{ x.nome }} {{ x.sobrenome }} </li>
+                    {% endfor %}
+                </ul>
                 
                 <div class="container px-0 mt-4">
                     <a href="{% url 'criar_aluno'%}">

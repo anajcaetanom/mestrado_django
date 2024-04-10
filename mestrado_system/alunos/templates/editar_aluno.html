@@ -73,14 +73,14 @@
 
                     <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
 
-                    <button type="submit" class="btn btn-outline-success">Salvar Edições</button>
-                </form>
-                
-                <!-- Modal button -->
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAluno">
-                    Excluir aluno
-                </button>    
+                    <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
 
+                <!-- Modal button -->
+                
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalAluno">
+                    Excluir aluno
+                </button>
+                
                 <div class="modal fade" id="modalAluno" tabindex="-1" aria-labelledby="modalAlunoLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -89,23 +89,74 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             
-                            <div>
+                            <div class="modal-body m-3">
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDesistencia" data-bs-dismiss="modal">Desistência</button>                 
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalTrancamento" data-bs-dismiss="modal">Trancamento</button>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalJubilamento" data-bs-dismiss="modal">Jubilamento</button>
+                                <form method="post" action="{% url 'excluir_aluno' aluno.id %}" style="display: inline-block;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja excluir este aluno?')" style="display: inline-block;">Excluir aluno</button>
+                                </form>
+                            </div>
 
-                                <button type="button" class="btn btn-secondary">Desistência</button>
-                                <button type="button" class="btn btn-secondary">Jubilamento</button>
-                                <button type="button" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Modal de Desistência -->
+                <div class="modal fade" id="modalDesistencia" tabindex="-1" aria-labelledby="modalDesistenciaLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalDesistenciaLabel">Registrar Desistência</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Formulário de Desistência -->
+                                <form id="desistirForm" method="post" action="{% url 'desistir_aluno' aluno_id=aluno.id %}">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="motivo" class="form-label">Motivo da Desistência</label>
+                                        <input type="text" class="form-control" id="motivo" name="motivo" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger">Confirmar Desistência</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalTrancamento" tabindex="-1" aria-labelledby="modalTrancamentoLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTrancamentoLabel">Trancamento</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                                                            
+                            <div class="modal-body m-3"> 
+                                oi
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalJu" tabindex="-1" aria-labelledby="modalTrancamentoLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTrancamentoLabel">Trancamento</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                                                            
+                            <div class="modal-body m-3"> 
+                                oi
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--++++++++++++++++++++++++++-->
-
-                <form method="post" action="{% url 'excluir_aluno' aluno.id %}" style="display: inline-block;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger mt-2" onclick="return confirm('Tem certeza que deseja excluir este aluno?')">Excluir aluno</button>
-                </form>
-    
+                
             </div>
         </div>
         <div class="col"></div>
