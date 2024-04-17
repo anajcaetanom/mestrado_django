@@ -113,11 +113,12 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Formulário de Desistência -->
-                                <p><label for="id_situacao">Situacao:</label> {{ form.situacao }}</p>
-                                <p><label for="id_motivo">Motivo:</label> {{ form.motivo }}</p>
+                                <form method="post" action="{% url 'desistencia' aluno.id %}"> 
+                                    {% csrf_token %}
+                                    <p><label for="id_motivo">Motivo:</label> {{ form.motivo }}</p>
 
-                                <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
-                                
+                                    <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
+                                </form>   
                             </div>
                         </div>
                     </div>
@@ -132,22 +133,34 @@
                             </div>
                                                             
                             <div class="modal-body m-3"> 
-                                oi
+                                <!-- Formulário de Trancamento -->
+                                <form method="post" action="{% url 'trancamento' aluno.id %}"> 
+                                    {% csrf_token %}
+                                    <p><label for="id_motivo">Motivo:</label> {{ form.motivo }}</p>
+
+                                    <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
+                                </form> 
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade" id="modalJu" tabindex="-1" aria-labelledby="modalTrancamentoLabel" aria-hidden="true">
+                <div class="modal fade" id="modalJubilamento" tabindex="-1" aria-labelledby="modalJubilamentoLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalTrancamentoLabel">Trancamento</h5>
+                                <h5 class="modal-title" id="modalJubilamentoLabel">Jubilamento</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                                                             
                             <div class="modal-body m-3"> 
-                                oi
+                                <!-- Formulário de Jubilamento -->
+                                <form method="post" action="{% url 'jubilado' aluno.id %}"> 
+                                    {% csrf_token %}
+                                    <p><label for="id_motivo">Motivo:</label> {{ form.motivo }}</p>
+
+                                    <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
+                                </form> 
                             </div>
                         </div>
                     </div>

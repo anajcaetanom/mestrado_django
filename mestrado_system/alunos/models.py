@@ -22,7 +22,7 @@ class Aluno(models.Model):
         ("C", "Concluído"),
     ]
 
-    situacao = models.CharField(max_length=2, choices=SITUACAO_CHOICES, null=True)
+    situacao = models.CharField(max_length=2, choices=SITUACAO_CHOICES, default='E')
     motivo = models.TextField(null=True, blank=True)
 
     def __str__(self):

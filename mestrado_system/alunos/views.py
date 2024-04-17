@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from .models import Aluno
-from .forms import AlunoForm, FiltroDataForm
+from .forms import AlunoForm, FiltroDataForm, AlunoForm_Edit, AlunoForm_Situacao
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
@@ -10,10 +10,8 @@ from turmas.models import Turma
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
-def alunos(request):
+def pesquisa_aluno(request):
     query = request.GET.get('aluno')
-    defendeu = request.GET.get('defendeu')
-    turmas_selecionadas = request.GET.getlist('turma')
 
     if query:
         # Dividindo a consulta em palavras-chave
@@ -34,6 +32,13 @@ def alunos(request):
 
     else:
         alunosValues = Aluno.objects.all()
+
+    return alunosValues
+
+def alunos(request):
+    alunosValues = pesquisa_aluno(request)
+    defendeu = request.GET.get('defendeu')
+    turmas_selecionadas = request.GET.getlist('turma')
 
     if defendeu == '0':
         alunosValues = alunosValues.filter(defesa=True)
@@ -60,6 +65,19 @@ def alunos(request):
     
     return render(request, 'alunosList.html', context)
 
+
+def alunos_desistencia(request):
+    alunosValues = pesquisa_aluno(request)
+
+    alunosValues = Aluno.objects.filter(situacao = 'D')
+
+    context = {
+        'alunosValues': alunosValues, 
+        }
+    
+    return render(request, 'alunoList_desistencia.html', context)
+
+
 def alunoInfo(request, id):
     alunoID = get_object_or_404(Aluno, id=id)
     template = loader.get_template('alunoInfo.html')
@@ -69,7 +87,6 @@ def alunoInfo(request, id):
 @login_required
 def criar_aluno(request):
     form = AlunoForm()
-    
     if request.method == 'POST':
         form = AlunoForm(request.POST)
         if form.is_valid():
@@ -83,7 +100,7 @@ def editar_aluno(request, aluno_id):
     aluno = get_object_or_404(Aluno, id=aluno_id)
     
     if request.method == 'POST':
-        form = AlunoForm(request.POST, instance=aluno)
+        form = AlunoForm_Edit(request.POST, instance=aluno)
         if form.is_valid():
             form.save()
             return redirect('alunoInfo', id=aluno.id)
@@ -92,10 +109,63 @@ def editar_aluno(request, aluno_id):
             # Re-renderize o formulário com os erros
             return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
     else:
-        form = AlunoForm(instance=aluno)
+        form = AlunoForm_Edit(instance=aluno)
         return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno}) 
     
-        
+def desistencia(request, aluno_id):
+    aluno = get_object_or_404(Aluno, id=aluno_id)
+    
+    if request.method == 'POST':
+        form = AlunoForm_Situacao(request.POST, instance=aluno)
+        if form.is_valid():
+            alunoSituacao = form.save(commit=False)
+            alunoSituacao.situacao = "D"
+            alunoSituacao.save()
+            return redirect('alunoInfo', id=aluno.id)
+        else:
+            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
+            # Re-renderize o formulário com os erros
+            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
+    else:
+        form = AlunoForm_Situacao(instance=aluno)
+        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
+
+def jubilado(request, aluno_id):
+    aluno = get_object_or_404(Aluno, id=aluno_id)
+    
+    if request.method == 'POST':
+        form = AlunoForm_Situacao(request.POST, instance=aluno)
+        if form.is_valid():
+            alunoSituacao = form.save(commit=False)
+            alunoSituacao.situacao = "J"
+            alunoSituacao.save()
+            return redirect('alunoInfo', id=aluno.id)
+        else:
+            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
+            # Re-renderize o formulário com os erros
+            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
+    else:
+        form = AlunoForm_Situacao(instance=aluno)
+        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
+
+def trancamento(request, aluno_id):
+    aluno = get_object_or_404(Aluno, id=aluno_id)
+    
+    if request.method == 'POST':
+        form = AlunoForm_Situacao(request.POST, instance=aluno)
+        if form.is_valid():
+            alunoSituacao = form.save(commit=False)
+            alunoSituacao.situacao = "T"
+            alunoSituacao.save()
+            return redirect('alunoInfo', id=aluno.id)
+        else:
+            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
+            # Re-renderize o formulário com os erros
+            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
+    else:
+        form = AlunoForm_Situacao(instance=aluno)
+        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
+     
 
 @login_required 
 def excluir_aluno(request, aluno_id):
