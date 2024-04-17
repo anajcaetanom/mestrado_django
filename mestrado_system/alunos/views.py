@@ -56,7 +56,6 @@ def alunos(request):
         'contador': contador, # Pode ser retirado junto com a parte do html
         'turmas': todas_turmas, 
         'turmas_selecionadas': turmas_selecionadas,
-        'alunosDesistentes' : alunosDesistentes,
         }
     
     return render(request, 'alunosList.html', context)

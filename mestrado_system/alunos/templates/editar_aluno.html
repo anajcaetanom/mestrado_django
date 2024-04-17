@@ -75,7 +75,7 @@
 
                     <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
 
-                <!-- Modal button -->
+                <!-- ################ MODAL BUTTON ################ -->
                 
                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalAluno">
                     Excluir aluno
@@ -113,13 +113,11 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Formulário de Desistência -->
-                                <form id="desistirForm" method="post" action="{% url 'desistir_aluno' aluno_id=aluno.id %}">
-                                    {% csrf_token %}
-                                    <div class="mb-3">
-                                        
-                                    </div>
-                                    <button type="submit" class="btn btn-danger">Confirmar Desistência</button>
-                                </form>
+                                <p><label for="id_situacao">Situacao:</label> {{ form.situacao }}</p>
+                                <p><label for="id_motivo">Motivo:</label> {{ form.motivo }}</p>
+
+                                <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
+                                
                             </div>
                         </div>
                     </div>

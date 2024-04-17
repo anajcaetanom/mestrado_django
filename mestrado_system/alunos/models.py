@@ -19,6 +19,7 @@ class Aluno(models.Model):
         ("J", "Jubilado"),
         ("D", "Desistência"),
         ("T", "Trancamento"),
+        ("C", "Concluído"),
     ]
 
     situacao = models.CharField(max_length=2, choices=SITUACAO_CHOICES, null=True)
