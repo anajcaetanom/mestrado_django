@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
-from .models import Aluno, Jubilado, Trancamento, Desistente
+from .models import Aluno
 from .forms import AlunoForm, FiltroDataForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -49,7 +49,6 @@ def alunos(request):
     for turma_id in turmas_selecionadas:
         turmas_query |= Q(curso_id=turma_id)
     alunosValues = alunosValues.filter(turmas_query)
-    alunosDesistentes = Desistente.objects.all()
 
     context = {
         'alunosValues': alunosValues, 
@@ -128,33 +127,3 @@ def filtrar_alunos(request):
         form = FiltroDataForm()
 
     return render(request, 'teste.html', {'form': form})
-
-def desistir_aluno(request, aluno_id):
-    aluno = get_object_or_404(Aluno, pk=aluno_id)
-
-    # Extrair o motivo da desistência do request POST
-    motivo = request.POST.get('motivo', '')
-
-    # Criar um novo objeto Desistente com base nos dados do Aluno
-    novo_desistente = Desistente(
-        nome=aluno.nome,
-        sobrenome=aluno.sobrenome,
-        curso=aluno.curso,
-        defesa=aluno.defesa,
-        data_defesa=aluno.data_defesa,
-        artigo=aluno.artigo,
-        bolsista=aluno.bolsista,
-        obs=aluno.obs,
-        email=aluno.email,
-        matricula=aluno.matricula,
-        motivo=motivo  # Adicionar o motivo da desistência
-    )
-
-    # Salvar o novo objeto Desistente
-    novo_desistente.save()
-
-    # Remover o aluno original
-    aluno.delete()
-
-    # Retornar uma resposta JSON indicando o sucesso
-    return redirect("alunos")

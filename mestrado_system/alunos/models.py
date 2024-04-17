@@ -14,21 +14,16 @@ class Aluno(models.Model):
     email = models.EmailField(max_length=255, null=True)
     matricula = models.CharField(max_length=20, null=True)
 
+    SITUACAO_CHOICES = [
+        ("E", "Em andamento"),
+        ("J", "Jubilado"),
+        ("D", "Desistência"),
+        ("T", "Trancamento"),
+    ]
+
+    situacao = models.CharField(max_length=2, choices=SITUACAO_CHOICES, null=True)
+    motivo = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return f"{self.nome} {self.sobrenome}"
-
-
-class Jubilado(Aluno):
-    motivo = models.CharField(max_length=255)
-    data_jubilamento = models.DateField(auto_now_add=True)
-    
-class Trancamento(Aluno):
-    motivo = models.CharField(max_length=255, blank=True)
-    data_trancamento = models.DateField(auto_now_add=True)
-    semestre_retorno = models.DateField(max_length=50, blank=True)
-    
-
-class Desistente(Aluno):
-    motivo = models.CharField(max_length=255)
-    data_desistencia = models.DateField(auto_now_add=True)
     

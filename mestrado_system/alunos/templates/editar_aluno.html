@@ -116,8 +116,7 @@
                                 <form id="desistirForm" method="post" action="{% url 'desistir_aluno' aluno_id=aluno.id %}">
                                     {% csrf_token %}
                                     <div class="mb-3">
-                                        <label for="motivo" class="form-label">Motivo da Desistência</label>
-                                        <input type="text" class="form-control" id="motivo" name="motivo" required>
+                                        
                                     </div>
                                     <button type="submit" class="btn btn-danger">Confirmar Desistência</button>
                                 </form>
