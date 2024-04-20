@@ -9,30 +9,29 @@
     {% include "header.html" %}
 
     <div class="row">
-        <div class="col">
-            <div class="d-flex align-items-start">
-                <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</button>
-                    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
-                    <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
-                    <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
-                </div>
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-                </div>
-            </div>
-              
-        </div>
-        <div class="col">
+        <div class="row">
+            <div class="col"></div>
 
-            <div class="container p-5 my-5 border"> 
+            <div class="col">
 
-                <!-- BACK BUTTON -->
+                <nav>
+                    <div class="nav nav-tabs mt-5" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-todos-tab" data-bs-toggle="tab" data-bs-target="#nav-todos" type="button" role="tab" aria-controls="#nav-todos" aria-selected="true">Todos</button>
+                        <button class="nav-link" id="nav-ativos-tab" data-bs-toggle="tab" data-bs-target="#nav-ativos" type="button" role="tab" aria-controls="#nav-ativos" aria-selected="false">Ativos</button>
+                        <button class="nav-link" id="nav-trancados-tab" data-bs-toggle="tab" data-bs-target="#nav-trancados" type="button" role="tab" aria-controls="#nav-trancados" aria-selected="false">Trancados</button>
+                        <button class="nav-link" id="nav-jubilados-tab" data-bs-toggle="tab" data-bs-target="#nav-jubilados" type="button" role="tab" aria-controls="#nav-jubilados" aria-selected="false">Jubilados</button>
+                        <button class="nav-link" id="nav-desistentes-tab" data-bs-toggle="tab" data-bs-target="#nav-desistentes" type="button" role="tab" aria-controls="#nav-desistentes" aria-selected="false">Desistentes</button>
+                        <button class="nav-link" id="nav-concluidos-tab" data-bs-toggle="tab" data-bs-target="#nav-concluidos" type="button" role="tab" aria-controls="#nav-concluidos" aria-selected="false">Defenderam</button>
+                    </div>
+                </nav>
+            
+
+            <div class="container p-5 mb-5 border"> 
+
                 <div class="row mb-4">
-                    <div class="col">
+
+                    <!-- BACK BUTTON -->
+                    <div class="col-3">
                         <a href="/">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
@@ -40,29 +39,90 @@
                         </a>
                     </div>
 
-                    <!-- page title -->
-                    <div class="col-6">
-                        <h2 class="text-center">Todos os alunos</h2>
+                    <!-- search bar -->
+                    <div class="col-md-auto">
+                        <form method="GET">
+                            <input type="text" name="aluno" placeholder="Buscar aluno">
+                            <button type="submit">Buscar</button>
+                        </form>
                     </div>
+
                     <div class="col"></div>
+
                 </div> 
 
-                <!-- search bar -->
-                <div class="container px-1 my-2">
-                    <form method="GET">
-                        <input type="text" name="aluno" placeholder="Buscar aluno">
-                        <button type="submit">Buscar</button>
-                    </form>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-todos" role="tabpanel" aria-labelledby="nav-todos-tab">
+    
+                        <!-- alunos listados -->
+                        <ul class="list-group list-group-flush">
+                            {% for x in alunosValues %}
+                            <li class="list-group-item"> <a href="{% url 'alunoInfo' prefix='alunos' id=x.id %}">{{ x.nome }} {{ x.sobrenome }}</a> </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+    
+                    <div class="tab-pane fade" id="nav-ativos" role="tabpanel" aria-labelledby="nav-ativos-tab">
+
+                        <!-- alunos listados -->
+                        <ul class="list-group list-group-flush">
+                            {% for aluno in alunosAtivos %}
+                            <li class="list-group-item"> <a href="{% url 'alunoInfo' prefix='alunos' id=aluno.id %}">{{ aluno.nome }} {{ aluno }}</a> </li>
+                            {% endfor %}
+                        </uv>
+
+                    </div>
+                    
+                    <div class="tab-pane fade" id="nav-trancados" role="tabpanel" aria-labelledby="nav-trancados-tab">
+
+                        <!-- alunos listados -->
+                        <ul class="list-group list-group-flush">
+                            {% for aluno in alunosTrancados %}
+                            <li class="list-group-item"> <a href="{% url 'alunoInfo' prefix='alunos' id=aluno.id %}">{{ aluno.nome }} {{ aluno }}</a> </li>
+                            {% endfor %}
+                        </uv>
+                        
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-jubilados" role="tabpanel" aria-labelledby="nav-jubilados-tab">
+
+                        <!-- alunos listados -->
+                        <ul class="list-group list-group-flush">
+                            {% for aluno in alunosJubilados %}
+                            <li class="list-group-item"> <a href="{% url 'alunoInfo' prefix='alunos' id=aluno.id %}">{{ aluno.nome }} {{ aluno }}</a> </li>
+                            {% endfor %}
+                        </uv>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-desistentes" role="tabpanel" aria-labelledby="nav-desistentes-tab">
+    
+                        <!-- alunos listados -->
+                        <ul class="list-group list-group-flush">
+                            {% for aluno in alunosDesistentes %}
+                            <li class="list-group-item"> <a href="{% url 'alunoInfo' prefix='alunos' id=aluno.id %}">{{ aluno.nome }} {{ aluno }}</a> </li>
+                            {% endfor %}
+                        </ul>
+    
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-concluidos" role="tabpanel" aria-labelledby="nav-concluidos-tab">
+    
+                        <!-- alunos listados -->
+                        <ul class="list-group list-group-flush">
+                            {% for aluno in alunosConcluidos %}
+                            <li class="list-group-item"> <a href="{% url 'alunoInfo' prefix='alunos' id=aluno.id %}">{{ aluno.nome }} {{ aluno }}</a> </li>
+                            {% endfor %}
+                        </ul>
+    
+                            
+                        </ul>
+    
+                    </div>
+                    
                 </div>
 
-                
-
-                <!-- alunos listados -->
-                <ul class="list-group list-group-flush">
-                    {% for x in alunosValues %}
-                    <li class="list-group-item"> <a href="alunoInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
-                    {% endfor %}
-                </ul>
 
                 <div class="container px-0 mt-4">
                     <a href="{% url 'criar_aluno'%}">
@@ -74,6 +134,7 @@
               
             </div>
         </div>
+
         <div class="col">
             <div class="row">
                 <div class="col-2"></div>
@@ -116,5 +177,6 @@
         </div>
 
     </div> 
+    
 
 {% endblock %}

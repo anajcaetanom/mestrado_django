@@ -53,7 +53,18 @@ def alunos(request):
     turmas_query = Q()
     for turma_id in turmas_selecionadas:
         turmas_query |= Q(curso_id=turma_id)
+
     alunosValues = alunosValues.filter(turmas_query)
+
+    alunosAtivos = alunosValues.filter(situacao= 'E')
+
+    alunosDesistentes = alunosValues.filter(situacao='D')
+
+    alunosJubilados = alunosValues.filter(situacao= 'J')
+
+    alunosTrancados = alunosValues.filter(situacao= 'T')
+
+    alunosConcluidos = alunosValues.filter(situacao= 'C')
 
     context = {
         'alunosValues': alunosValues, 
@@ -61,28 +72,20 @@ def alunos(request):
         'contador': contador, # Pode ser retirado junto com a parte do html
         'turmas': todas_turmas, 
         'turmas_selecionadas': turmas_selecionadas,
+        'alunosAtivos' : alunosAtivos,
+        'alunosDesistentes' : alunosDesistentes,
+        'alunosJubilados' : alunosJubilados,
+        'alunosTrancados' : alunosTrancados,
+        'alunosConcluidos' : alunosConcluidos,
         }
     
     return render(request, 'alunosList.html', context)
 
 
-def alunos_desistencia(request):
-    alunosValues = pesquisa_aluno(request)
-
-    alunosValues = Aluno.objects.filter(situacao = 'D')
-
-    context = {
-        'alunosValues': alunosValues, 
-        }
-    
-    return render(request, 'alunoList_desistencia.html', context)
-
-
-def alunoInfo(request, id):
+def alunoInfo(request, prefix, id):
     alunoID = get_object_or_404(Aluno, id=id)
-    template = loader.get_template('alunoInfo.html')
-    context = {'alunoID': alunoID, }
-    return HttpResponse(template.render(context, request))
+    context = {'alunoID': alunoID, 'prefix': prefix}
+    return render(request, 'alunoInfo.html', context)
 
 @login_required
 def criar_aluno(request):
