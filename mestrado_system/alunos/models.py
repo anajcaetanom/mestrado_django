@@ -9,7 +9,7 @@ class Aluno(models.Model):
     defesa = models.BooleanField(blank=True)
     data_defesa = models.DateField(null=True, blank=True)
     artigo = models.URLField(max_length=400, blank=True)
-    bolsista = models.CharField(max_length=30)
+    bolsista = models.CharField(max_length=30, null=True, blank=True)
     obs = models.TextField(max_length=255, blank=True)
     email = models.EmailField(max_length=255, null=True)
     matricula = models.CharField(max_length=20, null=True)

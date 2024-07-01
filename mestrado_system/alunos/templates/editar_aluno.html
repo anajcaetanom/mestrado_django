@@ -20,7 +20,8 @@
                 <!-- back button -->
                 <div class="row mb-4">
                     <div class="col">
-                        <a href={% url 'alunoInfo' aluno.id %}>
+                        <!-- back button -->
+                        <a href={% url 'alunoInfo' prefix='aluno' id=aluno.id %}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                             </svg>
@@ -113,7 +114,7 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Formulário de Desistência -->
-                                <form method="post" action="{% url 'desistencia' aluno.id %}"> 
+                                <form method="post" action="{% url 'desistencia' id=aluno.id %}"> 
                                     {% csrf_token %}
                                     <p><label for="id_motivo">Motivo:</label> {{ form.motivo }}</p>
 

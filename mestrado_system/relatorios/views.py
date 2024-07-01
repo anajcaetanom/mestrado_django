@@ -1,13 +1,25 @@
 from django.shortcuts import render
 from alunos.models import Aluno
+from turmas.models import Turma
+
 
 # Create your views here.
 
 def relatorioslist(request):
-    return render(request, "relatorioslist.html") 
+    alunos = Aluno.objects.all()
+    todas_as_turmas = Turma.objects.all().values()
+
+    turmas_selecionadas_ids = request.GET.getlist('turmas')
+
+    if turmas_selecionadas_ids:
+        alunos = alunos.filter(turma__id__in=turmas_selecionadas_ids)
+
+    return render(request, "relatorioslist.html", {'todas_as_turmas': todas_as_turmas})
+
 
 def relatorio_defesa(request):
-    query = request.GET.get('q')
+    query = request.GET.get('buscar_aluno')
+    
     if query:
         alunos_filtrados = Aluno.objects.filter(nome__icontains=query)
         defenderam = alunos_filtrados.filter(defesa=True).count()
@@ -18,10 +30,8 @@ def relatorio_defesa(request):
         total_alunos = alunos_filtrados.count()
 
     if total_alunos > 0:
-        media = (defenderam / total_alunos) * 100
+        porcentagem = (defenderam / total_alunos) * 100
     else:
-        media = 0
+        porcentagem = 0
 
-    return render(request, "relatorio_defesa.html", {'defenderam': defenderam, 'media': media, 'alunos': alunos_filtrados})
-
-
+    return render(request, "relatorio_defesa.html", {'alunos' : alunos,'defenderam': defenderam, 'porcentagem': porcentagem, 'alunos': alunos_filtrados})
