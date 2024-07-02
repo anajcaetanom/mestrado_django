@@ -88,15 +88,10 @@ WSGI_APPLICATION = 'mestrado_system.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'defaultdb',
-        'USER': 'avnadmin',
-        'PASSWORD': 'AVNS_sWLlwUVFXfTNhu9aaQS',
-        'HOST': 'pg-e1e7aa8-davidsoncarvalhos45-e96f.h.aivencloud.com',
-        'PORT': '16853'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
