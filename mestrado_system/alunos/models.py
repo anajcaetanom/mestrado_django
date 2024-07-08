@@ -4,11 +4,11 @@ from turmas.models import Turma
 class Aluno(models.Model):
     nome = models.CharField(max_length=255)
     sobrenome = models.CharField(max_length=255)
-    curso = models.ForeignKey(Turma, on_delete=models.SET_NULL, null=True)
+    turma = models.ForeignKey(Turma, on_delete=models.SET_NULL, null=True)
     orientadores = models.ManyToManyField('docentes.Docente', related_name='alunos_orientados')
     defesa = models.BooleanField(blank=True)
     data_defesa = models.DateField(null=True, blank=True)
-    artigo = models.URLField(max_length=400, blank=True)
+    artigo = models.CharField(max_length=255, null=True, blank=True)
     bolsista = models.CharField(max_length=30, null=True, blank=True)
     obs = models.TextField(max_length=255, blank=True)
     email = models.EmailField(max_length=255, null=True)

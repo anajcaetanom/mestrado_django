@@ -9,4 +9,4 @@ class Turma(models.Model):
     data_de_criacao = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return self.curso
+        return self.nome

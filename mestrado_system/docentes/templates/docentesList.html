@@ -25,19 +25,21 @@
                         <h2 class="text-center">Docentes</h2>
                     </div>
                     <div class="col"></div>
-                  </div> 
+                </div> 
 
-                  <form method="GET">
-                    <input type="text" name="q" placeholder="Buscar docente">
-                    <button type="submit">Buscar</button>
-                  </form>
+                <form method="GET">
+                <input type="text" name="q" placeholder="Buscar docente">
+                <button type="submit">Buscar</button>
+                </form>
 
-                <ul>
-                    {% for x in docentesValues %}
-                    <li> <a href="docenteInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
-                    {% endfor %}
-                </ul>
-        
+                <div class="my-3">
+                    <ul class="list-group list-group-flush">
+                        {% for x in docentesValues %}
+                        <li class="list-group-item"> <a href="docenteInfo/{{ x.id }}"> {{ x.nome }} {{ x.sobrenome }}</a> </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
                 <div class="container px-0 mt-4">
                     <a href="{% url 'criar_docente'%}">
                         <button type="button" class="btn btn-outline-dark">
@@ -48,7 +50,7 @@
               
             </div>
         </div>
-        <div class="col"></div>
+        <div class="col"> </div>
     </div> 
 
     

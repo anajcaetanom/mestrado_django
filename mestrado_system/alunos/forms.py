@@ -8,7 +8,7 @@ class AlunoForm(forms.ModelForm):
         fields = [
             "nome", 
             "sobrenome", 
-            "curso", 
+            "turma", 
             "orientadores", 
             "defesa", 
             "data_defesa", 
@@ -34,7 +34,7 @@ class AlunoForm_Edit(AlunoForm):
 class AlunoForm_Situacao(forms.ModelForm):
     class Meta:
         model = Aluno
-        fields = ['motivo']
+        fields = []
 
 
 class FiltroDataForm(forms.Form):

@@ -9,7 +9,11 @@
     {% include "header.html" %}
 
     {% if messages %}
-    
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
     <div class="row">
@@ -42,7 +46,7 @@
 
                     <p><label for="id_sobrenome">Sobrenome:</label> {{ form.sobrenome }}</p>
 
-                    <p><label for="id_curso">Curso:</label> {{ form.curso }}</p>
+                    <p><label for="id_turma">Turma:</label> {{ form.turma }}</p>
 
                     <p><label for="id_orientador1">Orientadores:</label> {{ form.orientadores }}</p>
 
@@ -59,7 +63,6 @@
                     <div id="artigoField" style="display:none;">
                         <p><label for="id_artigo">Artigo:</label> 
                             <input type="text" id="id_artigo" name="artigo" value="{{ form.artigo.value }}">
-                            <span id="urlError" style="color: red;"></span>
                         </p>
                     </div>
                     
@@ -73,6 +76,8 @@
                     
 
                     <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
+                    
+                    <p><label for="id_situacao">Situação:</label> {{form.situacao}}</p>
 
                     <button type="submit" class="btn btn-outline-success mb-2">Salvar Edições</button>
                 </form>

@@ -10,16 +10,16 @@ from django.contrib.auth.decorators import login_required
 from users.urls import *
 
 def turmas(request):
-    all_turmas = Turma.objects.all().values()
+    all_turmas = Turma.objects.all().values().order_by('nome')
     template = loader.get_template('display_turmas.html')
     context = {'all_turmas': all_turmas,}
     return HttpResponse(template.render(context, request))
 
 def details(request, id):
     myturma = Turma.objects.get(id=id)
-    aluno_defendeu = Aluno.objects.filter(defesa=True, curso=myturma)
-    contador = Aluno.objects.filter(defesa=True, curso=myturma).count()
-    aluno_turma = Aluno.objects.filter(curso=myturma)
+    aluno_defendeu = Aluno.objects.filter(defesa=True, turma=myturma)
+    contador = Aluno.objects.filter(defesa=True, turma=myturma).count()
+    aluno_turma = Aluno.objects.filter(turma=myturma)
     context = {'myturma': myturma, 'aluno_turma' : aluno_turma, 'aluno_defendeu': aluno_defendeu, 'contador': contador}
     return render(request, "details.html", context)
 

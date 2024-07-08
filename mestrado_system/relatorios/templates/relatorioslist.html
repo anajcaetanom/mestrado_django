@@ -39,15 +39,67 @@
                     
                     <div class="col"></div>
 
+                    <!-- search bar -->
+                    <div class="my-3">
+                        <form method="GET">
+                            <input type="text" name="naosei" placeholder="Buscar">
+                            <button type="submit">Buscar</button>
+                        </form>
+                    </div>
+                    
+                    
+                    <!-- turmas -->
+                    <h3> Turmas </h3>
+                    <div class="mt-2 mb-3">
+                        <ul class="list-group">
+                            {% for turma in todas_as_turmas %}
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                                    <label class="form-check-label" for="radioCheckbox"> {{ turma.nome }} </label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
 
-                    <ul class="list-group">
-                        {% for turma in todas_as_turmas %}
+                    <!-- docentes -->
+                    <h3> Docentes </h3>
+                    <div class="mt-2 mb-3">
+                        <ul class="list-group">
+                            {% for docente in todos_os_docentes %}
                             <li class="list-group-item">
-                                <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                                <label class="form-check-label" for="firstCheckbox"> {{ turma.nome }} </label>
+                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                                <label class="form-check-label" for="radioCheckbox"> {{ docente.nome }} </label>
                             </li>
-                        {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <!-- anos -->
+                    <h3> Anos </h3>
+                    <ul class="list-group">
+                        
+                        <li class="list-group-item">
+                            <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                            <label class="form-check-label" for="radioCheckbox"> 2024 </label>
+                        </li>
+
+                        <li class="list-group-item">
+                            <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                            <label class="form-check-label" for="radioCheckbox"> 2023 </label>
+                        </li>
+                        
                     </ul>
+                     
+                    <!-- data especifica -->
+                    <h3> Intervalo de data </h3>
+                    
+                        <!-- {% for turma in todas_as_turmas %} -->
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                                <label class="form-check-label" for="radioCheckbox"> Pesquisar por intervalo de data </label>
+                            </li>
+                        <!-- {% endfor %} -->
+                    
 
                     <button type="submit">Filtrar</button>
                   

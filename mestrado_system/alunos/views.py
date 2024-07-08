@@ -9,6 +9,7 @@ from django.contrib import messages
 from turmas.models import Turma
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.urls import reverse
 
 def pesquisa_aluno(request):
     query = request.GET.get('aluno')
@@ -31,7 +32,7 @@ def pesquisa_aluno(request):
         alunosValues = Aluno.objects.filter(pesquisa)
 
     else:
-        alunosValues = Aluno.objects.all()
+        alunosValues = Aluno.objects.all().order_by('nome')
 
     return alunosValues
 
@@ -48,11 +49,11 @@ def alunos(request):
     aluno_defendeu = Aluno.objects.filter(defesa=True) # Pode ser retirado junto com a parte do html
     contador = Aluno.objects.filter(defesa=True).count() # Pode ser retirado junto com a parte do html
 
-    todas_turmas = Turma.objects.all()
+    todas_turmas = Turma.objects.all().order_by('nome')
 
     turmas_query = Q()
-    for turma_id in turmas_selecionadas:
-        turmas_query |= Q(curso_id=turma_id)
+    for curso_id in turmas_selecionadas:
+        turmas_query |= Q(turma_id=curso_id)
 
     alunosValues = alunosValues.filter(turmas_query)
 
@@ -106,7 +107,8 @@ def editar_aluno(request, aluno_id):
         form = AlunoForm_Edit(request.POST, instance=aluno)
         if form.is_valid():
             form.save()
-            return redirect('alunoInfo', id=aluno.id)
+            prefixed_url = reverse('alunoInfo', kwargs={'prefix': 'alunos', 'id': aluno.id})
+            return redirect(prefixed_url)
         else:
             messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
             # Re-renderize o formulário com os erros
@@ -188,7 +190,7 @@ def filtrar_alunos(request):
             data_fim = form.cleaned_data.get('data_fim')
             
             # Filtre os alunos com base nas datas fornecidas
-            alunos = Aluno.objects.all()
+            alunos = Aluno.objects.all().order_by('nome')
             if data_inicio:
                 alunos = alunos.filter(data_defesa__gte=data_inicio)
             if data_fim:

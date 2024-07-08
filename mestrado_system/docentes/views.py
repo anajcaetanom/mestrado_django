@@ -25,20 +25,15 @@ def docentes(request):
         # Realizando a consulta no banco de dados
         docentesValues = Docente.objects.filter(pesquisa)
     else:
-        docentesValues = Docente.objects.all()
+        docentesValues = Docente.objects.all().order_by('nome')
     
     context = {'docentesValues': docentesValues}
     return render(request, 'docentesList.html', context)
 
-
-
-
-
-
 def docenteInfo(request, id):
     docenteID = get_object_or_404(Docente, id=id)
     template = loader.get_template('docenteInfo.html')
-    alunos_orientados = docenteID.alunos_orientados.all()
+    alunos_orientados = docenteID.alunos_orientados.all().order_by('nome')
     context = {'docenteID': docenteID, 'alunos_orientados': alunos_orientados }
     return HttpResponse(template.render(context, request))
 
@@ -72,6 +67,6 @@ def excluir_docente(request, docente_id):
     
     if request.method == 'POST':
         docente.delete()
-        return redirect('docente')
+        return redirect('docentes')
 
     return render(request, {'docente': docente})

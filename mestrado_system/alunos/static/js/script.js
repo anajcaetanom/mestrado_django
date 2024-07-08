@@ -2,7 +2,7 @@ window.onload = function() {
     // Chama a função para mostrar/ocultar campos com base na seleção da caixa de seleção "Defesa"
     showArtigoField();
 
-    // Adicione um ouvinte de evento ao formulário para validar a URL antes de enviar
+    /* Adicione um ouvinte de evento ao formulário para validar a URL antes de enviar
     document.getElementById("editar-aluno-form").addEventListener("submit", function(event) {
         // Chama a função de validação da URL antes de enviar o formulário
         if (!validarURL()) {
@@ -10,6 +10,7 @@ window.onload = function() {
             event.preventDefault();
         }
     });
+    */
 }
 
 // Show "artigo" field only if "defesa" checkbox is checked.
@@ -27,7 +28,7 @@ function showArtigoField() {
     }
 }
 
-// Validate URL function
+/* Validate URL function
 function validarURL() {
     var urlInput = document.getElementById("id_artigo");
     var urlError = document.getElementById("urlError");
@@ -45,3 +46,4 @@ function validarURL() {
         return true;
     }
 }
+*/
