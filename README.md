@@ -26,14 +26,14 @@
 - forms.py: Definição dos formulários utilizados na aplicação.
 - urls.py: Mapeamento das URLs para as respectivas visualizações.
 
-### 👥 Autores
-
-- Davidson Carvalho dos Santos - [@Davidsonnj](https://github.com/Davidsonnj)
-- Ana Júlia Caetano Martins - [@anajcaetanom](https://github.com/anajcaetanom)
-- Wal Candeia - [@](https://github.com/)
-
 # 🗂️ Materiais
 
 - [Kanban | Trello](https://trello.com/b/L8RGbOB7/laborat%C3%B3rio-902t)
 - [Planilha Mestrado | Google Sheets](https://docs.google.com/spreadsheets/d/1qeDMsl7Sx597QFeHDuu-N359-_ndFZyx624fjPwJ3n0/edit?gid=1126102230#gid=1126102230)
 - [Notion] (https://www.notion.so/Prop-s-5943951523464a9da339b4014b742566?pvs=4)
+
+### 👥 Autores
+
+- Davidson Carvalho dos Santos - [@Davidsonnj](https://github.com/Davidsonnj)
+- Ana Júlia Caetano Martins - [@anajcaetanom](https://github.com/anajcaetanom)
+- Wal Candeia - [@](https://github.com/)
