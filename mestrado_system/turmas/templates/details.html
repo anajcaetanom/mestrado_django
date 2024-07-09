@@ -43,18 +43,19 @@
         
                 <!-- alunos que fazem parte da turma -->
                 <div class="text-center mt-4">
-                    <button class="btn btn-outline-primary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#demo" aria-expanded="false" aria-controls="demo">
-                        Ver Alunos
-                    </button>
-                </div>  
-        
-                <div id="demo" class="collapse">
-                    <ul>
-                        {% for aluno in aluno_turma %}
-                        <li> <a href="/alunos/alunoInfo/{{ aluno.id }}/">{{ aluno.nome }} {{ aluno.sobrenome }}</a> </li>
+                    <h3> Alunos: </h3>
+
+                    <ul class="list-group">
+                        {% for aluno in alunos_da_turma %}
+                        <li class="list-group-item"> <a href="/alunos/alunoInfo/{{ aluno.id }}/">{{ aluno.nome }} {{ aluno.sobrenome }}</a> </li>
                         {% endfor %}
                     </ul>
-                </div>
+
+                </div>  
+        
+                
+                    
+                
 
                 <!--######################## FILTROS ########################-->
 

@@ -37,71 +37,119 @@
                     </div>
 
                     
-                    <div class="col"></div>
+                    <div class="col"></div>                   
 
-                    <!-- search bar -->
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    
+                    <form method="get">
+
                     <div class="my-3">
-                        <form method="GET">
-                            <input type="text" name="naosei" placeholder="Buscar">
-                            <button type="submit">Buscar</button>
+                        <label for="turma">Turma:</label>
+                        <select id="turma" name="turma">
+                            <option value="">Todas</option>
+                            {% for turma in turmas %}
+                                <option value="{{ turma.id }}">{{ turma.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ano">Ano de Defesa:</label>
+                        <input type="number" id="ano" name="ano">
+                    </div>
+
+                    <div class="mb-3"> 
+                        <label for="docente">Orientador:</label>
+                        <select id="docente" name="docente">
+                            <option value="">Todos</option>
+                            {% for docente in docentes %}
+                                <option value="{{ docente.id }}">{{ docente }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3"> 
+                        <label for="situacao_all">Situação:</label>
+                        <select id="situacao_all" name="situacao_all">
+                            <option value="">Todas</option>
+                            {% for situacao in situacao_all %}
+                                <option value="{{ situacao.0 }}" {% if situacao.0 == situacao_selecionada %}selected{% endif %}>
+                                    {{ situacao.1 }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div> 
+
+                    <div class="my-3">
+                        <button type="submit" class="btn btn-outline-primary">Filtrar</button>
                         </form>
                     </div>
-                    
-                    
-                    <!-- turmas -->
-                    <h3> Turmas </h3>
-                    <div class="mt-2 mb-3">
-                        <ul class="list-group">
-                            {% for turma in todas_as_turmas %}
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
-                                    <label class="form-check-label" for="radioCheckbox"> {{ turma.nome }} </label>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                
+                    {% if not messages %}
 
-                    <!-- docentes -->
-                    <h3> Docentes </h3>
-                    <div class="mt-2 mb-3">
-                        <ul class="list-group">
-                            {% for docente in todos_os_docentes %}
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
-                                <label class="form-check-label" for="radioCheckbox"> {{ docente.nome }} </label>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    
-                    <!-- anos -->
-                    <h3> Anos </h3>
-                    <ul class="list-group">
-                        
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
-                            <label class="form-check-label" for="radioCheckbox"> 2024 </label>
-                        </li>
+                        <div class="my-1">   
+                            {% if alunos %}
+                                
+                                <h4>Dados:</h4>
 
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
-                            <label class="form-check-label" for="radioCheckbox"> 2023 </label>
-                        </li>
-                        
-                    </ul>
-                     
-                    <!-- data especifica -->
-                    <h3> Intervalo de data </h3>
-                    
-                        <!-- {% for turma in todas_as_turmas %} -->
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
-                                <label class="form-check-label" for="radioCheckbox"> Pesquisar por intervalo de data </label>
-                            </li>
-                        <!-- {% endfor %} -->
-                    
+                                <p> Total de alunos: {{ alunos_count }}
+                                <ul class="list-group list-group-flush">
+                                {% for aluno in alunos %}
+                                    {%if aluno.situacao == 'E' %}
+                                        {%if aluno.defesa %}
+                                            <li class="list-group-item"><font color="01a800"> [Em andamento] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Defesa: {{ aluno.data_defesa|date:"d/m/Y" }}
+                                        {%else%}
+                                            <li class="list-group-item"><font color="01a800"> [Em andamento] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Não defendeu.</li>
+                                        {%endif%}
+                                    {%endif%}
 
-                    <button type="submit">Filtrar</button>
+                                    {%if aluno.situacao == 'J' %}
+                                        {%if aluno.defesa %}
+                                            <li class="list-group-item"><font color="a8a8a8"> [Jubilado] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Defesa: {{ aluno.data_defesa|date:"d/m/Y" }}
+                                        {%else%}
+                                            <li class="list-group-item"><font color="a8a8a8"> [Jubilado] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Não defendeu.</li>
+                                        {%endif%}
+                                    {%endif%}
+
+                                    {%if aluno.situacao == 'D' %}
+                                        {%if aluno.defesa %}
+                                            <li class="list-group-item"><font color="ff0000"> [Desistente] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Defesa: {{ aluno.data_defesa|date:"d/m/Y" }}
+                                        {%else%}
+                                            <li class="list-group-item"><font color="ff0000"> [Desistente] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Não defendeu.</li>
+                                        {%endif%}
+                                    {%endif%}
+
+                                    {%if aluno.situacao == 'T' %}
+                                        {%if aluno.defesa %}
+                                            <li class="list-group-item"><font color="ffa500"> [Trancado] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Defesa: {{ aluno.data_defesa|date:"d/m/Y" }}
+                                        {%else%}
+                                            <li class="list-group-item"><font color="ffa500"> [Trancado] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Não defendeu.</li>
+                                        {%endif%}
+                                    {%endif%}
+
+                                    {%if aluno.situacao == 'C' %} 
+                                        {%if aluno.defesa %}
+                                            <li class="list-group-item"><font color="0000ff"> [Concluído] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Defesa: {{ aluno.data_defesa|date:"d/m/Y" }}
+                                        {%else%}
+                                            <li class="list-group-item"><font color="0000ff"> [Concluído] </font> - {{ aluno.nome }} {{ aluno.sobrenome }} - Não defendeu.</li>
+                                        {%endif%}
+                                    {%endif%}
+
+                                    
+                                {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Nenhum aluno encontrado.</p>
+                            {% endif %}
+                        </div>
+                
+                    {% endif %}
                   
 
                 </div> 

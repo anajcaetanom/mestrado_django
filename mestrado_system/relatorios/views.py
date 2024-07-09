@@ -43,8 +43,12 @@ def filtrar_alunos(request):
     turma_selecionada = request.GET.get('turma')
     ano = request.GET.get('ano')
     docente_selecionado = request.GET.get('docente')
+    situacao_selecionada = request.GET.get('situacao_all')
 
-    alunos = Aluno.objects.all()
+    alunos = Aluno.objects.all().order_by('situacao')
+    turmas = Turma.objects.all()
+    docentes = Docente.objects.all()
+    situacao_all = Aluno.SITUACAO_CHOICES
 
     if turma_selecionada:
         alunos = alunos.filter(turma__id=turma_selecionada)
@@ -52,7 +56,7 @@ def filtrar_alunos(request):
     if ano:
         try:
             ano = int(ano)
-            if ano > 1900:
+            if 3000 > ano > 1900:
                 alunos = alunos.filter(data_defesa__year=ano)
             else:
                 messages.error(request, 'Por favor, insira um ano válido.')
@@ -62,8 +66,10 @@ def filtrar_alunos(request):
     if docente_selecionado:
         alunos = alunos.filter(orientadores__id=docente_selecionado)
 
-    turmas = Turma.objects.all()
-    docentes = Docente.objects.all()
+    if situacao_selecionada:
+        alunos = alunos.filter(situacao=situacao_selecionada)
+
+    alunos_count = alunos.count()
 
     contexto = {
         'alunos': alunos,
@@ -72,6 +78,9 @@ def filtrar_alunos(request):
         'turma_selecionada': turma_selecionada,
         'ano': ano,
         'docente_selecionado': docente_selecionado,
+        'alunos_count': alunos_count,
+        'situacao_all': situacao_all,
+        'situacao_selecionada': situacao_selecionada
     }
 
-    return render(request, 'filtro_alunos.html', contexto)
+    return render(request, 'relatorioslist.html', contexto)
