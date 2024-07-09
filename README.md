@@ -35,4 +35,4 @@
 
 - Davidson Carvalho dos Santos - [@Davidsonnj](https://github.com/Davidsonnj)
 - Ana Júlia Caetano Martins - [@anajcaetanom](https://github.com/anajcaetanom)
-- Wal Candeia - [@](https://github.com/)
+- Wal Candeia - [@onllywal](https://github.com/onllywal)
