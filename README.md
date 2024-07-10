@@ -30,7 +30,7 @@
 
 - [Kanban | Trello](https://trello.com/b/L8RGbOB7/laborat%C3%B3rio-902t)
 
-### 👥 Autores
+## 👥 Autores
 
 - Davidson Carvalho dos Santos - [@Davidsonnj](https://github.com/Davidsonnj)
 - Ana Júlia Caetano Martins - [@anajcaetanom](https://github.com/anajcaetanom)
