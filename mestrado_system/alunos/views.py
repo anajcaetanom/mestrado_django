@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from .models import Aluno
-from .forms import AlunoForm, FiltroDataForm, AlunoForm_Edit, AlunoForm_Situacao
+from .forms import AlunoForm, AlunoForm_Edit
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
@@ -116,60 +116,6 @@ def editar_aluno(request, aluno_id):
     else:
         form = AlunoForm_Edit(instance=aluno)
         return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno}) 
-    
-def desistencia(request, aluno_id):
-    aluno = get_object_or_404(Aluno, id=aluno_id)
-    
-    if request.method == 'POST':
-        form = AlunoForm_Situacao(request.POST, instance=aluno)
-        if form.is_valid():
-            alunoSituacao = form.save(commit=False)
-            alunoSituacao.situacao = "D"
-            alunoSituacao.save()
-            return redirect('alunoInfo', id=aluno.id)
-        else:
-            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
-            # Re-renderize o formulário com os erros
-            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
-    else:
-        form = AlunoForm_Situacao(instance=aluno)
-        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
-
-def jubilado(request, aluno_id):
-    aluno = get_object_or_404(Aluno, id=aluno_id)
-    
-    if request.method == 'POST':
-        form = AlunoForm_Situacao(request.POST, instance=aluno)
-        if form.is_valid():
-            alunoSituacao = form.save(commit=False)
-            alunoSituacao.situacao = "J"
-            alunoSituacao.save()
-            return redirect('alunoInfo', id=aluno.id)
-        else:
-            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
-            # Re-renderize o formulário com os erros
-            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
-    else:
-        form = AlunoForm_Situacao(instance=aluno)
-        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
-
-def trancamento(request, aluno_id):
-    aluno = get_object_or_404(Aluno, id=aluno_id)
-    
-    if request.method == 'POST':
-        form = AlunoForm_Situacao(request.POST, instance=aluno)
-        if form.is_valid():
-            alunoSituacao = form.save(commit=False)
-            alunoSituacao.situacao = "T"
-            alunoSituacao.save()
-            return redirect('alunoInfo', id=aluno.id)
-        else:
-            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
-            # Re-renderize o formulário com os erros
-            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
-    else:
-        form = AlunoForm_Situacao(instance=aluno)
-        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
      
 
 @login_required 
@@ -182,22 +128,18 @@ def excluir_aluno(request, aluno_id):
 
     return render(request, {'aluno': aluno})
 
-def filtrar_alunos(request):
-    if request.method == 'GET':
-        form = FiltroDataForm(request.GET)
+def editar_aluno(request, aluno_id):
+    aluno = get_object_or_404(Aluno, id=aluno_id)
+    
+    if request.method == 'POST':
+        form = AlunoForm_Edit(request.POST, instance=aluno)
         if form.is_valid():
-            data_inicio = form.cleaned_data.get('data_inicio')
-            data_fim = form.cleaned_data.get('data_fim')
-            
-            # Filtre os alunos com base nas datas fornecidas
-            alunos = Aluno.objects.all().order_by('nome')
-            if data_inicio:
-                alunos = alunos.filter(data_defesa__gte=data_inicio)
-            if data_fim:
-                alunos = alunos.filter(data_defesa__lte=data_fim)
-            
-            return render(request, 'teste.html', {'alunos': alunos, 'form': form})
+            form.save()
+            prefixed_url = reverse('alunoInfo', kwargs={'prefix': 'alunos', 'id': aluno.id})
+            return redirect(prefixed_url)
+        else:
+            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
+            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
     else:
-        form = FiltroDataForm()
-
-    return render(request, 'teste.html', {'form': form})
+        form = AlunoForm_Edit(instance=aluno)
+        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})

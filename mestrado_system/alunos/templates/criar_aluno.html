@@ -33,7 +33,17 @@
                     <p><label for="id_orientador1">Orientadores:</label> {{ form.orientadores }}</p>
                     <p><label for="id_email">E-mail:</label> {{form.email}} </p>
                     <p><label for="id_matricula">Matrícula:</label> {{form.matricula}} </p>
-                    <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
+                    <p>
+                        <label for="id_eh_bolsista">Bolsista:</label> 
+                        <input type="checkbox" id="id_eh_bolsista" name="eh_bolsista" {% if form.instance.eh_bolsista %}checked{% endif %} onclick="showBolsaField()">
+                    </p>
+
+                    <div id="bolsaField" style="display:none;">
+                        <p><label for="id_nome_da_bolsa">Bolsa:</label> 
+                            <input type="text" id="id_nome_da_bolsa" name="nome_da_bolsa" value="{{ form.nome_da_bolsa.value }}">
+                        </p>
+                    </div>
+
                     <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
 
                     <button type="submit" class="btn btn-outline-success">Salvar</button> 
@@ -44,5 +54,6 @@
         <div class="col"></div>
     </div> 
 
-    
+    <script src="{% static 'js/script.js' %}"></script>  
+
 {% endblock %}

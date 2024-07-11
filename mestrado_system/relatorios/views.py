@@ -3,6 +3,7 @@ from alunos.models import Aluno
 from turmas.models import Turma
 from docentes.models import Docente
 from django.contrib import messages
+from datetime import datetime
 
 
 # Create your views here.
@@ -19,31 +20,12 @@ def relatorioslist(request):
 
     return render(request, "relatorioslist.html", {'todas_as_turmas': todas_as_turmas, 'todos_os_docentes': todos_os_docentes})
 
-
-def relatorio_defesa(request):
-    query = request.GET.get('buscar_aluno')
-    
-    if query:
-        alunos_filtrados = Aluno.objects.filter(nome__icontains=query)
-        defenderam = alunos_filtrados.filter(defesa=True).count()
-        total_alunos = alunos_filtrados.count()
-    else:
-        alunos_filtrados = Aluno.objects.all()
-        defenderam = alunos_filtrados.filter(defesa=True).count()
-        total_alunos = alunos_filtrados.count()
-
-    if total_alunos > 0:
-        porcentagem = (defenderam / total_alunos) * 100
-    else:
-        porcentagem = 0
-
-    return render(request, "relatorio_defesa.html", {'alunos' : alunos,'defenderam': defenderam, 'porcentagem': porcentagem, 'alunos': alunos_filtrados})
-
 def filtrar_alunos(request):
     turma_selecionada = request.GET.get('turma')
-    ano = request.GET.get('ano')
     docente_selecionado = request.GET.get('docente')
     situacao_selecionada = request.GET.get('situacao_all')
+    data_inicio = request.GET.get('data_inicio')
+    data_fim = request.GET.get('data_fim')
 
     alunos = Aluno.objects.all().order_by('situacao')
     turmas = Turma.objects.all()
@@ -53,21 +35,25 @@ def filtrar_alunos(request):
     if turma_selecionada:
         alunos = alunos.filter(turma__id=turma_selecionada)
 
-    if ano:
-        try:
-            ano = int(ano)
-            if 3000 > ano > 1900:
-                alunos = alunos.filter(data_defesa__year=ano)
-            else:
-                messages.error(request, 'Por favor, insira um ano válido.')
-        except ValueError:
-            messages.error(request, 'Por favor, insira um ano válido.')
-
     if docente_selecionado:
         alunos = alunos.filter(orientadores__id=docente_selecionado)
 
     if situacao_selecionada:
         alunos = alunos.filter(situacao=situacao_selecionada)
+    
+    if data_inicio:
+        try:
+            data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d').date()
+            alunos = alunos.filter(data_defesa__gte=data_inicio)
+        except ValueError:
+            messages.error(request, 'Por favor, insira uma data de início válida no formato AAAA-MM-DD.')
+
+    if data_fim:
+        try:
+            data_fim = datetime.strptime(data_fim, '%Y-%m-%d').date()
+            alunos = alunos.filter(data_defesa__lte=data_fim)
+        except ValueError:
+            messages.error(request, 'Por favor, insira uma data final válida no formato AAAA-MM-DD.')
 
     alunos_count = alunos.count()
 
@@ -76,11 +62,12 @@ def filtrar_alunos(request):
         'turmas': turmas,
         'docentes': docentes,
         'turma_selecionada': turma_selecionada,
-        'ano': ano,
         'docente_selecionado': docente_selecionado,
         'alunos_count': alunos_count,
         'situacao_all': situacao_all,
-        'situacao_selecionada': situacao_selecionada
+        'situacao_selecionada': situacao_selecionada,
+        'data_inicio': data_inicio,
+        'data_fim': data_fim,
     }
 
     return render(request, 'relatorioslist.html', contexto)

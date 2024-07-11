@@ -54,10 +54,22 @@
 
                     <p><label for="id_matricula">Matrícula:</label> {{ form.matricula }} </p>
 
-                    <p><label for="id_bolsista">Bolsista:</label> {{ form.bolsista }}</p>
+                    <p><label for="id_academico"> Página do aluno no Acadêmico:</label> {{ form.academico }}
 
-                    <p><label for="id_defesa">Defendeu:</label> 
-                        <input type="checkbox" id="id_defesa" name="defesa" {% if aluno.defesa %}checked{% endif %} onclick="showArtigoField()">
+                    <p>
+                        <label for="id_eh_bolsista">Bolsista:</label> 
+                        <input type="checkbox" id="id_eh_bolsista" name="eh_bolsista" {% if form.instance.eh_bolsista %}checked{% endif %} onclick="showBolsaField()">
+                    </p>
+                    
+                    <div id="bolsaField" style="display:none;">
+                        <p><label for="id_nome_da_bolsa">Bolsa:</label> 
+                            <input type="text" id="id_nome_da_bolsa" name="nome_da_bolsa" value="{{ form.nome_da_bolsa.value }}">
+                        </p>
+                    </div>
+
+                    <p>
+                        <label for="id_defesa">Defendeu:</label> 
+                        <input type="checkbox" id="id_defesa" name="defesa" {% if form.instance.defesa %}checked{% endif %} onclick="showArtigoField()">
                     </p>
                     
                     <div id="artigoField" style="display:none;">
@@ -72,8 +84,7 @@
                             value="{% if form.instance.data_defesa %}{{ form.instance.data_defesa|date:"Y-m-d" }}{% endif %}"
                             min="1800-01-01" max="{% now "Y-m-d" %}">
                         </p>
-                    </div>
-                    
+                    </div>                    
 
                     <p><label for="id_obs">Observações:</label> {{ form.obs }}</p>
                     

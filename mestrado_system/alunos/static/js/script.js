@@ -1,6 +1,7 @@
 window.onload = function() {
     // Chama a função para mostrar/ocultar campos com base na seleção da caixa de seleção "Defesa"
     showArtigoField();
+    showBolsaField();
 
     /* Adicione um ouvinte de evento ao formulário para validar a URL antes de enviar
     document.getElementById("editar-aluno-form").addEventListener("submit", function(event) {
@@ -22,9 +23,21 @@ function showArtigoField() {
     if (checkBox.checked) {
         artigoField.style.display = "block";
         artigoDate.style.display = "block";
+        
     } else {
         artigoField.style.display = "none";
         artigoDate.style.display = "none";
+    }
+}
+
+function showBolsaField() {
+    var checkBox = document.getElementById("id_eh_bolsista");
+    var bolsaField = document.getElementById("bolsaField");
+
+    if (checkBox.checked) {
+        bolsaField.style.display = "block";
+    } else {
+        bolsaField.style.display = "none";
     }
 }
 

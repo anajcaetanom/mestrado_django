@@ -13,12 +13,14 @@ class AlunoForm(forms.ModelForm):
             "defesa", 
             "data_defesa", 
             "artigo", 
-            "bolsista",
+            "eh_bolsista",
+            "nome_da_bolsa",
             "obs", 
             "email", 
-            "matricula"
-            ]
-        ets = {
+            "matricula",
+            "academico"
+        ]
+        widgets = {
             'data_defesa': DateInput(attrs={
                 'data-provide': 'datepicker',
                 'class': 'form-control my-date-picker',
@@ -27,16 +29,6 @@ class AlunoForm(forms.ModelForm):
         }
 
 class AlunoForm_Edit(AlunoForm):
-
+    
     class Meta(AlunoForm.Meta):
         fields = AlunoForm.Meta.fields + ['situacao', 'motivo']
-
-class AlunoForm_Situacao(forms.ModelForm):
-    class Meta:
-        model = Aluno
-        fields = []
-
-
-class FiltroDataForm(forms.Form):
-    data_inicio = forms.DateField(label='Data de início', required=False)
-    data_fim = forms.DateField(label='Data de fim', required=False)
