@@ -58,7 +58,7 @@
 
                     <p>
                         <label for="id_eh_bolsista">Bolsista:</label> 
-                        <input type="checkbox" id="id_eh_bolsista" name="eh_bolsista" {% if form.instance.eh_bolsista %}checked{% endif %} onclick="showBolsaField()">
+                        <input type="checkbox" id="id_eh_bolsista" name="eh_bolsista" {% if form.instance.eh_bolsista %}checked{% endif %} >
                     </p>
                     
                     <div id="bolsaField" style="display:none;">
@@ -69,7 +69,7 @@
 
                     <p>
                         <label for="id_defesa">Defendeu:</label> 
-                        <input type="checkbox" id="id_defesa" name="defesa" {% if form.instance.defesa %}checked{% endif %} onclick="showArtigoField()">
+                        <input type="checkbox" id="id_defesa" name="defesa" {% if form.instance.defesa %}checked{% endif %} >
                     </p>
                     
                     <div id="artigoField" style="display:none;">

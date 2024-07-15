@@ -127,19 +127,3 @@ def excluir_aluno(request, aluno_id):
         return redirect('alunos')
 
     return render(request, {'aluno': aluno})
-
-def editar_aluno(request, aluno_id):
-    aluno = get_object_or_404(Aluno, id=aluno_id)
-    
-    if request.method == 'POST':
-        form = AlunoForm_Edit(request.POST, instance=aluno)
-        if form.is_valid():
-            form.save()
-            prefixed_url = reverse('alunoInfo', kwargs={'prefix': 'alunos', 'id': aluno.id})
-            return redirect(prefixed_url)
-        else:
-            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
-            return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
-    else:
-        form = AlunoForm_Edit(instance=aluno)
-        return render(request, 'editar_aluno.html', {'form': form, 'aluno': aluno})
