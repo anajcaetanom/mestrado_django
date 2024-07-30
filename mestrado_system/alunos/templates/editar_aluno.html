@@ -69,12 +69,12 @@
 
                     <p>
                         <label for="id_defesa">Defendeu:</label> 
-                        <input type="checkbox" id="id_defesa" name="defesa" {% if form.instance.defesa %}checked{% endif %} >
+                        <input type="checkbox" id="id_defesa" name="defesa" {% if form.instance.defesa %}checked{% endif %}>
                     </p>
                     
                     <div id="artigoField" style="display:none;">
                         <p><label for="id_artigo">Artigo:</label> 
-                            <input type="text" id="id_artigo" name="artigo" value="{{ form.artigo.value }}">
+                            <input type="text" id="id_artigo" name="artigo" value="{{ form.artigo.value }}" required>
                         </p>
                     </div>
                     
@@ -82,7 +82,7 @@
                         <p><label for="id_data_defesa">Data da Defesa:</label> 
                             <input type="date" id="id_data_defesa" name="data_defesa" 
                             value="{% if form.instance.data_defesa %}{{ form.instance.data_defesa|date:"Y-m-d" }}{% endif %}"
-                            min="1800-01-01" max="{% now "Y-m-d" %}">
+                            min="1800-01-01" max="{% now "Y-m-d" %}" required>
                         </p>
                     </div>                    
 
@@ -106,6 +106,6 @@
         <div class="col"></div>
     </div> 
 
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/script_EditarAluno.js' %}"></script>
     
 {% endblock %}

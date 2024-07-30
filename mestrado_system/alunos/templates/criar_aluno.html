@@ -1,10 +1,12 @@
 {% extends "master.html" %}
-
+{% load static %}
 {% block title %}
     Criar Aluno
 {% endblock %}
 
 {% block content %}
+
+    {% include "header.html" %}
 
     <div class="row">
         <div class="col"></div>
@@ -35,7 +37,7 @@
                     <p><label for="id_matricula">Matrícula:</label> {{form.matricula}} </p>
                     <p>
                         <label for="id_eh_bolsista">Bolsista:</label> 
-                        <input type="checkbox" id="id_eh_bolsista" name="eh_bolsista" {% if form.instance.eh_bolsista %}checked{% endif %} onclick="showBolsaField()">
+                        <input type="checkbox" id="id_eh_bolsista" name="eh_bolsista" {% if form.instance.eh_bolsista %}checked{% endif %}>
                     </p>
 
                     <div id="bolsaField" style="display:none;">
@@ -52,8 +54,41 @@
             </div>
         </div>
         <div class="col"></div>
-    </div> 
+    </div>
 
-    <script src="{% static 'js/script.js' %}"></script>  
+      <!-- Messages Modal -->
+    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messagesModalLabel">Mensagens</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script_CriarAluno.js' %}"></script>
+    
+    {% if messages %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var messagesModal = new bootstrap.Modal(document.getElementById('messagesModal'));
+            messagesModal.show();
+        });
+    </script>
+    {% endif %}
 
 {% endblock %}

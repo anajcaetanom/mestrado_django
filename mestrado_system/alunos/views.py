@@ -96,6 +96,10 @@ def criar_aluno(request):
         if form.is_valid():
             form.save()
             return redirect('alunos')
+        else:
+            messages.error(request, "O formulário contém erros. Por favor, corrija-os.")
+            # Re-renderize o formulário com os erros
+            return render(request, 'criar_aluno.html', {'form': form})
 
     return render(request, 'criar_aluno.html', {'form': form})
 
